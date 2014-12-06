@@ -9,7 +9,7 @@ game.resources = [
     {name: "metatiles32x32",  type:"image", src: "data/img/map/metatiles32x32.png"},
 	// the main player spritesheet
     {name: "gripe_run_right", type:"image", src: "data/img/sprite/gripe_run_right.png"},
-	{name: "cat_fighter_sprite1", type:"image", src: "data/img/sprite/cat_fighter_sprite1.png"},
+	{name: "cat_fighter", type:"image", src: "data/img/sprite/cat_fighter.png"},
 	// the parallax background
     {name: "loadbg",         type:"image", src: "data/img/loadbg.jpg"},
     //{name: "area01_bkg1",         type:"image", src: "data/img/area01_bkg1.png"},
