@@ -25,6 +25,8 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.addAnimation("walk",  [0, 3, 0, 4]);
         // define a standing animation (using the first frame)
         this.renderable.addAnimation("stand",  [0,21,0,20]);
+		this.renderable.addAnimation("jump",  [0,7]);
+		this.renderable.addAnimation("air",  [29,30]);
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
 		
@@ -65,12 +67,21 @@ game.PlayerEntity = me.Entity.extend({
 			}
         } else {
 			this.body.vel.x = 0;
-			if (!this.renderable.isCurrentAnimation("stand")) {
-				this.renderable.setCurrentAnimation("stand");
+			if(this.body.falling) {
+				if (!this.renderable.isCurrentAnimation("air")) {
+					this.renderable.setCurrentAnimation("air");
+				}
+			} else {
+				if (!this.renderable.isCurrentAnimation("stand")) {
+					this.renderable.setCurrentAnimation("stand");
+				}
 			}
         }
      
 		if (me.input.isKeyPressed('jump')) {
+			if (!this.renderable.isCurrentAnimation("jump")) {
+				this.renderable.setCurrentAnimation("jump");
+			}
 			// make sure we are not already jumping or falling
 			if (!this.body.jumping && !this.body.falling) {
 				this.body.doubleJump = false;
