@@ -22,12 +22,15 @@ game.PlayerEntity = me.Entity.extend({
         this.alwaysUpdate = true;
 		
 		// define a basic walking animation (using all frames)
-        this.renderable.addAnimation("walk",  [0, 1, 2, 3, 4, 5, 6, 7]);
+        this.renderable.addAnimation("walk",  [0, 3, 0, 4]);
         // define a standing animation (using the first frame)
-        this.renderable.addAnimation("stand",  [0]);
+        this.renderable.addAnimation("stand",  [0,21,0,20]);
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
 		
+		//this.body.addShape(new me.Rect(5,12,16,32));
+		//this.body.removeShape(0);
+		//console.log(this.body.shapes);
 		/*this.direction = 'stand2';
 		this.addAnimation("run", [0,1,2,3,4,5,6,7,8,9]);
 		this.addAnimation("stand", [33]);
@@ -53,7 +56,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
         } else if (me.input.isKeyPressed('right')) {
             // unflip the sprite
-            this.renderable.flipX(false);
+			this.renderable.flipX(false);
             // update the entity velocity
             this.body.vel.x += this.body.accel.x * me.timer.tick;
 			
@@ -61,24 +64,27 @@ game.PlayerEntity = me.Entity.extend({
                 this.renderable.setCurrentAnimation("walk");
 			}
         } else {
-         this.body.vel.x = 0;
+			this.body.vel.x = 0;
+			if (!this.renderable.isCurrentAnimation("stand")) {
+				this.renderable.setCurrentAnimation("stand");
+			}
         }
      
-        if (me.input.isKeyPressed('jump')) {
-            // make sure we are not already jumping or falling
-            if (!this.body.jumping && !this.body.falling) {
+		if (me.input.isKeyPressed('jump')) {
+			// make sure we are not already jumping or falling
+			if (!this.body.jumping && !this.body.falling) {
 				this.body.doubleJump = false;
-                // set current vel to the maximum defined value
-                // gravity will then do the rest
-                this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
-                // set the jumping flag
-                this.body.jumping = true;
-            }
+				// set current vel to the maximum defined value
+				// gravity will then do the rest
+				this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
+				// set the jumping flag
+				this.body.jumping = true;
+			}
 			else if((this.body.jumping || this.body.falling) && !this.body.doubleJump) {
 				this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
 				this.body.doubleJump = true;
 			}
-        }
+		}
  
         // check & update player movement
         this.body.update(dt);
