@@ -46,7 +46,8 @@
   <object name="mainPlayer" x="376" y="216" width="32" height="32">
    <properties>
     <property name="image" value="gripe_run_right"/>
-    <property name="spritewidth" value="64"/>
+    <property name="spriteheight" value="50"/>
+    <property name="spritewidth" value="50"/>
    </properties>
   </object>
  </objectgroup>
