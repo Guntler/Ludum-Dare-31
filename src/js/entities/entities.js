@@ -44,7 +44,7 @@ game.PlayerEntity = me.Entity.extend({
 		
         if (me.input.isKeyPressed('left')) {
             // flip the sprite on horizontal axis
-           // this.flipX(true);
+            this.renderable.flipX(true);
             // update the entity velocity
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
 			
@@ -53,7 +53,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
         } else if (me.input.isKeyPressed('right')) {
             // unflip the sprite
-          //  this.flipX(false);
+            this.renderable.flipX(false);
             // update the entity velocity
             this.body.vel.x += this.body.accel.x * me.timer.tick;
 			
