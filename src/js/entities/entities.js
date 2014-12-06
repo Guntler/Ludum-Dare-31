@@ -44,14 +44,22 @@ game.PlayerEntity = me.Entity.extend({
 		
         if (me.input.isKeyPressed('left')) {
             // flip the sprite on horizontal axis
-            this.flipX(true);
+           // this.flipX(true);
             // update the entity velocity
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
+			
+			if (!this.renderable.isCurrentAnimation("walk")) {
+                this.renderable.setCurrentAnimation("walk");
+			}
         } else if (me.input.isKeyPressed('right')) {
             // unflip the sprite
-            this.flipX(false);
+          //  this.flipX(false);
             // update the entity velocity
             this.body.vel.x += this.body.accel.x * me.timer.tick;
+			
+			if (!this.renderable.isCurrentAnimation("walk")) {
+                this.renderable.setCurrentAnimation("walk");
+			}
         } else {
          this.body.vel.x = 0;
         }
@@ -74,16 +82,15 @@ game.PlayerEntity = me.Entity.extend({
  
         // check & update player movement
         this.body.update(dt);
+		
+		me.collision.check(this);
  
         // update animation if necessary
-        if (this.body.vel.x!=0 || this.body.vel.y!=0) {
-            // update object animation
-            this._super(me.Entity, 'update', [dt]);
-            return true;
-        }
-     
-        // else inform the engine we did not perform
-        // any update (e.g. position, animation)
-        return false;
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x!=0 || this.body.vel.y!=0);
+    },
+	
+	onCollision : function (response, other) {
+        // Make all other objects solid
+        return true;
     }
 });
