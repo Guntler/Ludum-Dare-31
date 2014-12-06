@@ -1,8 +1,59 @@
 /*------------------- 
 a player entity
 -------------------------------- */
-game.PlayerEntity = me.Entity.extend({
+game.BulletEntity = me.Entity.extend({
 
+    /* -----
+    constructor
+    ------ */
+    init: function(x, y, vx, vy) {
+        // call the constructor
+        this._super(me.Entity, 'init', [x, y, {image: "bullet", width: 8, height: 8, spritewidth: 8, spriteheight: 8}]);
+		
+        // set the default horizontal & vertical speed (accel vector)
+        this.body.setVelocity(vx, vy);
+		this.body.setMaxVelocity(vx, vy); 
+		this.body.setFriction (0.3,0); 
+		
+        // ensure the player is updated even when outside of the viewport
+        this.alwaysUpdate = true;
+		this.z = 4;
+		this.lifetime = 5000;
+		
+		// define a basic walking animation (using all frames)
+        this.renderable.addAnimation("glow",  [0]);
+        // set the standing animation as default
+        this.renderable.setCurrentAnimation("glow");
+    },
+ 
+    /* -----
+    update the bullet pos
+    ------ */
+    update: function(dt) {
+		this.body.vel.x = this.body.accel.x;
+		this.body.vel.y = this.body.accel.y;
+ 
+        // check & update player movement
+        this.body.update(dt);
+		
+		me.collision.check(this);
+		
+		this.lifetime -= dt;
+		if(this.lifetime <= 0)
+			me.game.world.removeChild(this);
+ 
+        // update animation if necessary
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x!=0 || this.body.vel.y!=0);
+    },
+	
+	onCollision : function (response, other) {
+        // Make all other objects solid
+        return true;
+    }
+});
+
+game.PlayerEntity = me.Entity.extend({
+	
     /* -----
     constructor
     ------ */
@@ -30,16 +81,8 @@ game.PlayerEntity = me.Entity.extend({
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
 		
-		//this.body.addShape(new me.Rect(5,12,16,32));
-		//this.body.removeShape(0);
-		//console.log(this.body.shapes);
-		/*this.direction = 'stand2';
-		this.addAnimation("run", [0,1,2,3,4,5,6,7,8,9]);
-		this.addAnimation("stand", [33]);
-		this.addAnimation("stand2", [44]);
-		this.addAnimation("jump", [29,29,29,29,29,29,29,29,27,27]);
-		this.addAnimation("jump2", [26,27,27,27,29,29,27,27,26]);
-		this.updateColRect(23, 18, 4, 60);*/
+		this.cooldown = 100;
+		this.lastfired = null;
     },
  
     /* -----
@@ -96,6 +139,16 @@ game.PlayerEntity = me.Entity.extend({
 				this.body.doubleJump = true;
 			}
 		}
+		
+		if(me.input.isKeyPressed('shoot')) {
+			if(this.lastfired == null || this.lastfired <= 0) {
+				me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, 20, 0));
+				this.lastfired = this.cooldown;
+			}
+		}
+		
+		if(this.lastfired != null)
+			this.lastfired -= dt;
  
         // check & update player movement
         this.body.update(dt);

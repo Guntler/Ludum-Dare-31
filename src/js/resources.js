@@ -12,7 +12,8 @@ game.resources = [
 	{name: "cat_fighter", type:"image", src: "data/img/sprite/cat_fighter.png"},
 	// the parallax background
     {name: "loadbg",         type:"image", src: "data/img/loadbg.jpg"},
-	{name: "spacebg",         type:"image", src: "data/img/spacebg.png"},
+	{name: "spacebg",        type:"image", src: "data/img/spacebg.png"},
+	{name: "bullet",        type:"image", src: "data/img/sprite/bullet.png"},
     //{name: "area01_bkg1",         type:"image", src: "data/img/area01_bkg1.png"},
 
 	/* Atlases 
