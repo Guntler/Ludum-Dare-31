@@ -4,7 +4,7 @@ game.resources = [
 	 * @example
 	 * {name: "example", type:"image", src: "data/img/example.png"},
 	 */
-	{name: "area01_level_tiles", type:"image", src: "data/img/map/area01_level_tiles.png"},
+	{name: "techblocks2_1", type:"image", src: "data/img/map/techblocks2_1.png"},
 	{name: "lab1",  type:"image", src: "data/img/map/lab1.png"},
     {name: "metatiles32x32",  type:"image", src: "data/img/map/metatiles32x32.png"},
 	// the main player spritesheet
@@ -12,6 +12,7 @@ game.resources = [
 	{name: "cat_fighter", type:"image", src: "data/img/sprite/cat_fighter.png"},
 	// the parallax background
     {name: "loadbg",         type:"image", src: "data/img/loadbg.jpg"},
+	{name: "spacebg",         type:"image", src: "data/img/spacebg.png"},
     //{name: "area01_bkg1",         type:"image", src: "data/img/area01_bkg1.png"},
 
 	/* Atlases 
