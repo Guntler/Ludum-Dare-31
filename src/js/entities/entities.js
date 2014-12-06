@@ -1,8 +1,60 @@
 /*------------------- 
 a player entity
+ http://opengameart.org/content/minimal-platformer
 -------------------------------- */
-game.PlayerEntity = game.BaseEntity.extend({
+game.BulletEntity = me.Entity.extend({
 
+    /* -----
+    constructor
+    ------ */
+    init: function(x, y, vx, vy) {
+        // call the constructor
+        this._super(me.Entity, 'init', [x, y, {image: "bullet", width: 8, height: 8, spritewidth: 8, spriteheight: 8}]);
+		
+        // set the default horizontal & vertical speed (accel vector)
+        this.body.setVelocity(vx, vy);
+		this.body.setMaxVelocity(vx, vy); 
+		this.body.setFriction (0.3,0); 
+		
+        // ensure the player is updated even when outside of the viewport
+        this.alwaysUpdate = true;
+		this.z = 4;
+		this.lifetime = 5000;
+		
+		// define a basic walking animation (using all frames)
+        this.renderable.addAnimation("glow",  [0]);
+        // set the standing animation as default
+        this.renderable.setCurrentAnimation("glow");
+    },
+ 
+    /* -----
+    update the bullet pos
+    ------ */
+    update: function(dt) {
+		this.body.vel.x = this.body.accel.x;
+		this.body.vel.y = this.body.accel.y;
+ 
+        // check & update player movement
+        this.body.update(dt);
+		
+		me.collision.check(this);
+		
+		this.lifetime -= dt;
+		if(this.lifetime <= 0)
+			me.game.world.removeChild(this);
+ 
+        // update animation if necessary
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x!=0 || this.body.vel.y!=0);
+    },
+	
+	onCollision : function (response, other) {
+        // Make all other objects solid
+        return true;
+    }
+});
+
+game.PlayerEntity = game.BaseEntity.extend({
+	
     /* -----
     constructor
     ------ */
@@ -18,11 +70,13 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.renderable.addAnimation("air",  [29,30]);
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
-		
+
 		//this.body.addShape(new me.Rect(5,12,16,32));
 		//this.updateColRect(23, 18, 4, 60);
 
 		this.currentWep = null;
+		this.cooldown = 100;
+		this.lastfired = null;
     },
 
 	equipWep: function(weapon) {
@@ -109,6 +163,16 @@ game.PlayerEntity = game.BaseEntity.extend({
 				this.body.doubleJump = true;
 			}
 		}
+		
+		if(me.input.isKeyPressed('shoot')) {
+			if(this.lastfired == null || this.lastfired <= 0) {
+				me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, 20, 0));
+				this.lastfired = this.cooldown;
+			}
+		}
+		
+		if(this.lastfired != null)
+			this.lastfired -= dt;
  
         // check & update player movement
         this.body.update(dt);
