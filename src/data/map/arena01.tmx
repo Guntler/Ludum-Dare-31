@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="80" height="45" tilewidth="16" tileheight="16" backgroundcolor="#363636">
+<map version="1.0" orientation="orthogonal" width="80" height="45" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="collisions" tilewidth="16" tileheight="16">
   <image source="../img/map/metatiles32x32.png" width="160" height="32"/>
   <tile id="0">
@@ -36,7 +36,7 @@
  <tileset firstgid="21" name="SciFi" tilewidth="16" tileheight="16">
   <image source="../img/map/techblocks2_1.png" width="256" height="224"/>
  </tileset>
- <imagelayer name="bg" x="-1617" y="-849" visible="0">
+  <imagelayer name="bg" width="0" height="0" x="-1617" y="-849">
   <image source="../img/spacebg.png"/>
   <properties>
    <property name="type" value="0.25"/>
