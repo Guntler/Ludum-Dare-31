@@ -49,6 +49,7 @@ game.BulletEntity = me.Entity.extend({
         this._super(me.Entity, 'init', [x+16, y+16, {image: "bullet", width: 8, height: 8, spritewidth: 8, spriteheight: 8}]);
 
         this.owner = owner;
+        this.direction = this.owner.direction;
         // set the default horizontal & vertical speed (accel vector)
         this.body.setVelocity(20, 0);
         //this.body.setMaxVelocity(vx, vy);
@@ -69,7 +70,7 @@ game.BulletEntity = me.Entity.extend({
      update the bullet pos
      ------ */
     update: function(dt) {
-        if (this.owner.direction=="left") {
+        if (this.direction=="left") {
             this.body.pos.x -= 16;
             this.body.vel.x -= this.body.accel.x;
         }
