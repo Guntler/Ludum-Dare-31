@@ -60,6 +60,9 @@ game.EnemyEntity = game.BaseEntity.extend({
         else if(other.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
             return false;
         }
+        else if (other.body.setCollisionType === me.collision.types.NO_OBJECT) {
+            return false;
+        }
         else {return true;}
     }
 });

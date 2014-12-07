@@ -122,6 +122,9 @@ game.BulletEntity = me.Entity.extend({
             me.game.world.removeChild(this);
             return true;
         }
+        else if (other.body.setCollisionType === me.collision.types.NO_OBJECT) {
+            return false;
+        }
         else {return false;}
 
 

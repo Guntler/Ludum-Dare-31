@@ -60,6 +60,9 @@ game.PlayerEntity = game.BaseEntity.extend({
 				return true;
 			}
 		}
+		else if (other.body.setCollisionType === me.collision.types.NO_OBJECT) {
+			return false;
+		}
 		return true;
 	},
  

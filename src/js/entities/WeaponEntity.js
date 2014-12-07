@@ -92,7 +92,9 @@ game.WeaponEntity = game.BaseEntity.extend({
     },
 
     onCollision : function (response, other) {
-        // Make all other objects solid
+        if (other.body.setCollisionType === me.collision.types.NO_OBJECT) {
+            return false;
+        }
         return true;
     },
 
