@@ -25,6 +25,9 @@ game.PlayerEntity = game.BaseEntity.extend({
 
 		//this.body.addShape(new me.Rect(5,12,16,32));
 		//this.updateColRect(23, 18, 4, 60);
+		
+		// set the display to follow our position on both axis
+        me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		this.shooting = false;
 
