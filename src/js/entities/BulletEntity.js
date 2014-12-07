@@ -55,7 +55,7 @@ game.BulletEntity = me.Entity.extend({
         //this.body.setMaxVelocity(vx, vy);
 
 
-        // ensure the player is updated even when outside of the viewport
+        // ensure the bullet is updated even when outside of the viewport
         this.alwaysUpdate = true;
         this.z = 4;
         this.lifetime = 5000;
@@ -78,7 +78,7 @@ game.BulletEntity = me.Entity.extend({
             this.body.vel.x += this.body.accel.x;
         this.body.vel.y = this.body.accel.y;
 
-        // check & update player movement
+        // check & update bullet movement
         this.body.update(dt);
 
         me.collision.check(this);
