@@ -27,6 +27,10 @@ game.BaseEntity = me.Entity.extend({
     onCollision : function (response, other) {
         // Make all other objects solid
         return true;
+    },
+
+    hurt: function(val) {
+        this.health-=val;
     }
 })
 

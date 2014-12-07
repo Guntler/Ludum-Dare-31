@@ -25,7 +25,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 
 		//this.body.addShape(new me.Rect(5,12,16,32));
 		//this.updateColRect(23, 18, 4, 60);
-
+		this.body.setCollisionType = me.collision.types.PLAYER_OBJECT;
 		this.shooting = false;
 
 		this.currentWep = null;
@@ -38,13 +38,23 @@ game.PlayerEntity = game.BaseEntity.extend({
 	},
 
 	onCollision : function (response, other) {
-		if (response.b.body.collisionType === me.collision.types.ENEMY_OBJECT) {
-			this.pos.x -= response.b.x;
-			this.pos.y -= response.b.y;
-			console.log("Collided with enemy.");
+		if (other.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
+			//this.pos.x -= 5;
+			//this.pos.y -= 5;
+			//console.log("Collided with enemy.");
+			return true;
 		}
-		else if (response.b.body.collisionType === me.collision.types.COLLECTABLE_OBJECT) {
-			console.log("Collided with collectable.");
+		else if (other.body.setCollisionType === me.collision.types.COLLECTABLE_OBJECT) {
+			other.open(this);
+			//console.log("Collided with collectable.");
+		}
+		else if (other.body.setCollisionType === me.collision.types.PROJECTILE_OBJECT) {
+			if(other.owner.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
+				return false;
+			}
+			else {
+				return true;
+			}
 		}
 		return true;
 	},

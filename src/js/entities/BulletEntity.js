@@ -59,7 +59,10 @@ game.BulletEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         this.z = 4;
         this.lifetime = 5000;
+        this.body.setCollisionType = me.collision.types.PROJECTILE_OBJECT;
+
 		this.body.addShape(new me.Rect(0,0,8,8));
+        this.updated = false;
 
         // define a basic walking animation (using all frames)
         this.renderable.addAnimation("glow",  [0]);
@@ -72,7 +75,10 @@ game.BulletEntity = me.Entity.extend({
      ------ */
     update: function(dt) {
         if (this.direction=="left") {
-            this.body.pos.x -= 16;
+            if(!this.updated) {
+                this.body.pos.x -= 16;
+                this.updated=true;
+            }
             this.body.vel.x -= this.body.accel.x;
         }
         else
@@ -93,11 +99,31 @@ game.BulletEntity = me.Entity.extend({
     },
 
     onCollision : function (response, other) {
-        if (response.b.body.collisionType === me.collision.types.ENEMY_OBJECT
-            || response.b.body.collisionType === me.collision.types.WORLD_SHAPE
-            || response.b.body.collisionType === me.collision.types.WORLD_BOUNDARY) {
-            me.game.world.removeChild(this);
+        if(response.b.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
+            if(this.owner.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
+                //TODO
+            }
+            else if(this.owner.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
+                response.b.hurt(10);    //TODO switch for damage
+                me.game.world.removeChild(this);
+                return true;
+            }
         }
-        return true;
+        else if(response.b.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
+            if(this.owner.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
+                response.b.hurt(10);    //TODO switch for damage
+                me.game.world.removeChild(this);
+                return true;
+            }
+        }
+        else if(response.b.body.setCollisionType === me.collision.types.WORLD_SHAPE
+            || response.b.body.setCollisionType === me.collision.types.WORLD_BOUNDARY) {
+            //TODO explode if has radius
+            me.game.world.removeChild(this);
+            return true;
+        }
+        else {return false;}
+
+
     }
 });

@@ -10,6 +10,7 @@ game.resources = [
 	// the main player spritesheet
     {name: "gripe_run_right", type:"image", src: "data/img/sprite/gripe_run_right.png"},
 	{name: "cat_fighter", type:"image", src: "data/img/sprite/cat_fighter.png"},
+	{name: "skeleton", type:"image", src: "data/img/sprite/skeleton.png"},
 	// the parallax background
     {name: "loadbg",         type:"image", src: "data/img/loadbg.jpg"},
 	{name: "spacebg",        type:"image", src: "data/img/spacebg.png"},

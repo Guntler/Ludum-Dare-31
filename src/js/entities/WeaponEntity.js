@@ -72,8 +72,6 @@ game.WeaponEntity = game.BaseEntity.extend({
             spriteheight: 40
         }]);
 
-        this.body.gravity = 0;
-
         this.renderable.addAnimation("down", [0, 1, 2], 75);
         this.renderable.addAnimation("left", [3, 4, 5], 75);
         this.renderable.addAnimation("right", [6, 7, 8], 75);
@@ -87,7 +85,7 @@ game.WeaponEntity = game.BaseEntity.extend({
         this.body.addShape(new me.Rect(this.weapon.attackRect[2][0], this.weapon.attackRect[2][1], this.weapon.attackRect[2][2], this.weapon.attackRect[2][3]));	//Right
         this.body.addShape(new me.Rect(this.weapon.attackRect[3][0], this.weapon.attackRect[3][1], this.weapon.attackRect[3][2], this.weapon.attackRect[3][3]));	//Up
         this.body.setShape(0);
-        this.body.setCollisionMask(me.collision.types.NO_OBJECT);
+        this.body.setCollisionType = me.collision.types.COLLECTABLE_OBJECT;
 
         this.direction = owner.direction;
         this.renderable.setCurrentAnimation(this.direction);
@@ -96,5 +94,9 @@ game.WeaponEntity = game.BaseEntity.extend({
     onCollision : function (response, other) {
         // Make all other objects solid
         return true;
+    },
+
+    open : function(owner) {
+        owner.equipWep(this.weapon);
     }
 })
