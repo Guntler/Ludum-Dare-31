@@ -59,6 +59,7 @@ game.BulletEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         this.z = 4;
         this.lifetime = 5000;
+		this.body.addShape(new me.Rect(0,0,8,8));
 
         // define a basic walking animation (using all frames)
         this.renderable.addAnimation("glow",  [0]);
