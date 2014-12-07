@@ -29,8 +29,8 @@
       <file leaf-file-name="entities.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/entities/entities.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3689">
-              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="3689">
+              <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="44" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -39,8 +39,8 @@
       <file leaf-file-name="BulletEntity.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/entities/BulletEntity.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9477727" vertical-offset="1032" max-vertical-offset="1751">
-              <caret line="97" column="3" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.9059561" vertical-offset="1088" max-vertical-offset="1819">
+              <caret line="98" column="9" selection-start-line="94" selection-start-column="8" selection-end-line="98" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -59,8 +59,8 @@
       <file leaf-file-name="WeaponEntity.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/entities/WeaponEntity.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1751">
-              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="1751">
+              <caret line="62" column="2" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="2" />
               <folding>
                 <element signature="e#0#46#0" expanded="false" />
               </folding>
@@ -71,8 +71,8 @@
       <file leaf-file-name="BaseEntity.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/entities/BaseEntity.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="612">
-              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+              <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
               <folding>
                 <element signature="e#0#46#0" expanded="false" />
               </folding>
@@ -453,20 +453,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/lib/melonJS-2.0.1.js">
+    <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="31466" max-vertical-offset="335461">
-          <caret line="5058" column="0" selection-start-line="5058" selection-start-column="0" selection-end-line="5058" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/entities/BaseEntity.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#46#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-8.5" vertical-offset="289" max-vertical-offset="1207">
+          <caret line="30" column="82" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -486,36 +477,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/entities/entities.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3689">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5" vertical-offset="289" max-vertical-offset="1207">
-          <caret line="30" column="82" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/entities/WeaponEntity.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1751">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="1751">
+          <caret line="62" column="2" selection-start-line="62" selection-start-column="2" selection-end-line="62" selection-end-column="2" />
           <folding>
             <element signature="e#0#46#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/entities/entities.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="3689">
+          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="44" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/entities/BaseEntity.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#46#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lib/melonJS-2.0.1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38557994" vertical-offset="105511" max-vertical-offset="338045">
+          <caret line="9401" column="9" selection-start-line="9401" selection-start-column="9" selection-end-line="9401" selection-end-column="9" />
+          <folding>
+            <element signature="e#42489#44299#0" expanded="false" />
+            <element signature="e#44598#67162#0" expanded="false" />
+            <element signature="e#68465#75456#0" expanded="false" />
+            <element signature="e#83098#98991#0" expanded="false" />
+            <element signature="e#99112#108170#0" expanded="false" />
+            <element signature="e#108291#115944#0" expanded="false" />
+            <element signature="e#116091#126389#0" expanded="false" />
+            <element signature="e#126536#129850#0" expanded="false" />
+            <element signature="e#129971#135893#0" expanded="false" />
+            <element signature="e#136109#147479#0" expanded="false" />
+            <element signature="e#152271#152650#0" expanded="false" />
+            <element signature="e#152687#153183#0" expanded="false" />
+            <element signature="e#153194#153510#0" expanded="false" />
+            <element signature="e#153547#153602#0" expanded="false" />
+            <element signature="e#153613#153911#0" expanded="false" />
+            <element signature="e#153951#154201#0" expanded="false" />
+            <element signature="e#154212#154523#0" expanded="false" />
+            <element signature="e#154565#154635#0" expanded="false" />
+            <element signature="e#155555#155608#0" expanded="false" />
+            <element signature="e#155619#155894#0" expanded="false" />
+            <element signature="e#155943#156704#0" expanded="false" />
+            <element signature="e#156715#156959#0" expanded="false" />
+            <element signature="e#156995#157535#0" expanded="false" />
+            <element signature="e#157546#157917#0" expanded="false" />
+            <element signature="e#157956#158171#0" expanded="false" />
+            <element signature="e#158182#158467#0" expanded="false" />
+            <element signature="e#158509#158582#0" expanded="false" />
+            <element signature="e#158593#158852#0" expanded="false" />
+            <element signature="e#158891#158978#0" expanded="false" />
+            <element signature="e#158989#159065#0" expanded="false" />
+            <element signature="e#738002#739189#0" expanded="false" />
+            <element signature="e#740357#740400#0" expanded="false" />
+            <element signature="e#740476#741718#0" expanded="false" />
+            <element signature="e#741804#742397#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/entities/BulletEntity.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9477727" vertical-offset="1032" max-vertical-offset="1751">
-          <caret line="97" column="3" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.9059561" vertical-offset="1088" max-vertical-offset="1819">
+          <caret line="98" column="9" selection-start-line="94" selection-start-column="8" selection-end-line="98" selection-end-column="9" />
           <folding />
         </state>
       </provider>

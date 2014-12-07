@@ -92,7 +92,11 @@ game.BulletEntity = me.Entity.extend({
     },
 
     onCollision : function (response, other) {
-        // Make all other objects solid
+        if (response.b.body.collisionType === me.collision.types.ENEMY_OBJECT
+            || response.b.body.collisionType === me.collision.types.WORLD_SHAPE
+            || response.b.body.collisionType === me.collision.types.WORLD_BOUNDARY) {
+            me.game.world.removeChild(this);
+        }
         return true;
     }
 });
