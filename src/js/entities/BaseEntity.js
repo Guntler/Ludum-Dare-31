@@ -15,9 +15,6 @@ game.BaseEntity = me.Entity.extend({
         this.body.setMaxVelocity(5, 15);
         this.body.setFriction(0.3, 0);
 
-        // set the display to follow our position on both axis
-        me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-
         // ensure the player is updated even when outside of the viewport
         this.alwaysUpdate = true;
         this.health = 100;
