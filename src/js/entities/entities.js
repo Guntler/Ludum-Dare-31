@@ -1,58 +1,3 @@
-/*------------------- 
-a player entity
- http://opengameart.org/content/minimal-platformer
--------------------------------- */
-game.BulletEntity = me.Entity.extend({
-
-    /* -----
-    constructor
-    ------ */
-    init: function(x, y, vx, vy) {
-        // call the constructor
-        this._super(me.Entity, 'init', [x, y, {image: "bullet", width: 8, height: 8, spritewidth: 8, spriteheight: 8}]);
-		
-        // set the default horizontal & vertical speed (accel vector)
-        this.body.setVelocity(vx, vy);
-		this.body.setMaxVelocity(vx, vy); 
-		this.body.setFriction (0.3,0); 
-		
-        // ensure the player is updated even when outside of the viewport
-        this.alwaysUpdate = true;
-		this.z = 4;
-		this.lifetime = 5000;
-		
-		// define a basic walking animation (using all frames)
-        this.renderable.addAnimation("glow",  [0]);
-        // set the standing animation as default
-        this.renderable.setCurrentAnimation("glow");
-    },
- 
-    /* -----
-    update the bullet pos
-    ------ */
-    update: function(dt) {
-		this.body.vel.x = this.body.accel.x;
-		this.body.vel.y = this.body.accel.y;
- 
-        // check & update player movement
-        this.body.update(dt);
-		
-		me.collision.check(this);
-		
-		this.lifetime -= dt;
-		if(this.lifetime <= 0)
-			me.game.world.removeChild(this);
- 
-        // update animation if necessary
-        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x!=0 || this.body.vel.y!=0);
-    },
-	
-	onCollision : function (response, other) {
-        // Make all other objects solid
-        return true;
-    }
-});
-
 game.PlayerEntity = game.BaseEntity.extend({
 	
     /* -----
@@ -68,11 +13,20 @@ game.PlayerEntity = game.BaseEntity.extend({
         this.renderable.addAnimation("stand",  [0,21,0,20]);
 		this.renderable.addAnimation("jump",  [0,7]);
 		this.renderable.addAnimation("air",  [29,30]);
+		this.renderable.addAnimation("standhold",  [70,71,72,73,74,75,76,77]);
+		this.renderable.addAnimation("standshoot",  [80,81,82,83,84,85,86,87],100);
+		this.renderable.addAnimation("walkhold",  [90,91,92,93,94,95,96,97]);
+		this.renderable.addAnimation("walkshoot",  [100,101,102,103,104,105,106,107],100);
+		this.renderable.addAnimation("jumphold",  [110,111,112,113]);
+		this.renderable.addAnimation("airhold",  [114,115]);
+		this.renderable.addAnimation("airshoot",  [125,124],100);
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
 
 		//this.body.addShape(new me.Rect(5,12,16,32));
 		//this.updateColRect(23, 18, 4, 60);
+
+		this.shooting = false;
 
 		this.currentWep = null;
 		this.cooldown = 100;
@@ -94,18 +48,6 @@ game.PlayerEntity = game.BaseEntity.extend({
 		}
 		return true;
 	},
-
-	collisionHandler : function (response) {
-		//this.doTalk( res.obj );
-		if (response.b.body.collisionType === me.collision.types.ENEMY_OBJECT) {
-			this.pos.x -= response.b.x;
-			this.pos.y -= response.b.y;
-			console.log("Collided with enemy.");
-		}
-		else if (response.b.body.collisionType === me.collision.types.COLLECTABLE_OBJECT) {
-			console.log("Collided with collectable.");
-		}
-	},
  
     /* -----
     update the player pos
@@ -118,9 +60,24 @@ game.PlayerEntity = game.BaseEntity.extend({
             this.renderable.flipX(true);
             // update the entity velocity
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
-			
-			if (!this.renderable.isCurrentAnimation("walk")) {
-                this.renderable.setCurrentAnimation("walk");
+
+			if(this.shooting) {
+				if (!this.renderable.isCurrentAnimation("walkshoot")) {
+					this.renderable.setAnimationFrame();
+					this.renderable.setCurrentAnimation("walkshoot");
+				}
+			} else {
+				if(this.currentWeapon==null) {
+					if (!this.renderable.isCurrentAnimation("walkhold")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("walkhold");
+					}
+				} else {
+					if (!this.renderable.isCurrentAnimation("walk")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("walk");
+					}
+				}
 			}
         } else if (me.input.isKeyPressed('right')) {
 			this.direction = "right";
@@ -128,26 +85,86 @@ game.PlayerEntity = game.BaseEntity.extend({
 			this.renderable.flipX(false);
             // update the entity velocity
             this.body.vel.x += this.body.accel.x * me.timer.tick;
-			
-			if (!this.renderable.isCurrentAnimation("walk")) {
-                this.renderable.setCurrentAnimation("walk");
+
+			if(this.shooting) {
+				if (!this.renderable.isCurrentAnimation("walkshoot")) {
+					this.renderable.setAnimationFrame();
+					this.renderable.setCurrentAnimation("walkshoot");
+				}
+			} else {
+				if(this.currentWeapon==null) {
+					if (!this.renderable.isCurrentAnimation("walkhold")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("walkhold");
+					}
+				} else {
+					if (!this.renderable.isCurrentAnimation("walk")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("walk");
+					}
+				}
 			}
         } else {
 			this.body.vel.x = 0;
 			if(this.body.falling) {
-				if (!this.renderable.isCurrentAnimation("air")) {
-					this.renderable.setCurrentAnimation("air");
+				if(this.shooting) {
+					if (!this.renderable.isCurrentAnimation("airshoot")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("airshoot");
+					}
+				} else {
+					if(this.currentWeapon==null) {
+						if (!this.renderable.isCurrentAnimation("airhold")) {
+							this.renderable.setAnimationFrame();
+							this.renderable.setCurrentAnimation("airhold");
+						}
+					} else {
+						if (!this.renderable.isCurrentAnimation("air")) {
+							this.renderable.setAnimationFrame();
+							this.renderable.setCurrentAnimation("air");
+						}
+					}
 				}
 			} else {
-				if (!this.renderable.isCurrentAnimation("stand")) {
-					this.renderable.setCurrentAnimation("stand");
+				if(this.shooting) {
+					if (!this.renderable.isCurrentAnimation("standshoot")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("standshoot");
+					}
+				} else {
+					if(this.currentWeapon==null) {
+						if (!this.renderable.isCurrentAnimation("standhold")) {
+							this.renderable.setAnimationFrame();
+							this.renderable.setCurrentAnimation("standhold");
+						}
+					} else {
+						if (!this.renderable.isCurrentAnimation("stand")) {
+							this.renderable.setAnimationFrame();
+							this.renderable.setCurrentAnimation("stand");
+						}
+					}
 				}
 			}
         }
      
 		if (me.input.isKeyPressed('jump')) {
-			if (!this.renderable.isCurrentAnimation("jump")) {
-				this.renderable.setCurrentAnimation("jump");
+			if(this.shooting) {
+				if (!this.renderable.isCurrentAnimation("airshoot")) {
+					this.renderable.setAnimationFrame();
+					this.renderable.setCurrentAnimation("airshoot");
+				}
+			} else {
+				if(this.currentWeapon==null) {
+					if (!this.renderable.isCurrentAnimation("jumphold")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("jumphold");
+					}
+				} else {
+					if (!this.renderable.isCurrentAnimation("jump")) {
+						this.renderable.setAnimationFrame();
+						this.renderable.setCurrentAnimation("jump");
+					}
+				}
 			}
 			// make sure we are not already jumping or falling
 			if (!this.body.jumping && !this.body.falling) {
@@ -166,13 +183,21 @@ game.PlayerEntity = game.BaseEntity.extend({
 		
 		if(me.input.isKeyPressed('shoot')) {
 			if(this.lastfired == null || this.lastfired <= 0) {
-				me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, 20, 0));
+				if(this.direction=="right")
+					me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, this));
+				else
+					me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, this));
 				this.lastfired = this.cooldown;
+				this.shooting = true;
 			}
 		}
 		
 		if(this.lastfired != null)
 			this.lastfired -= dt;
+
+		if(this.lastfired<=0) {
+			this.shooting = false;
+		}
  
         // check & update player movement
         this.body.update(dt);

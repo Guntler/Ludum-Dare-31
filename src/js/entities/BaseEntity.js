@@ -20,7 +20,7 @@ game.BaseEntity = me.Entity.extend({
 
         // ensure the player is updated even when outside of the viewport
         this.alwaysUpdate = true;
-
+        this.health = 100;
         this.direction = "right";
     },
 

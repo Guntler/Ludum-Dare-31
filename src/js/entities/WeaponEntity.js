@@ -1,22 +1,50 @@
 /**
  * Created by pbpdi_000 on 06/12/2014.
  */
+//for the overworld
 game.weapons = {
-    sword: {
-        name: 'Sword',
-        image: "boy_sword",
-        animation: [2, 3, 4, 5],
+    melee: {
+        name: 'Melee',
+        image: "weapons",
+        animation: [0, 1, 2, 3],
+        spritewidth: 50,
+        spriteheight: 50,
         rate: 225,
         damage: 1,
-        speed: null,
-        projectile: null,
-        pWidth: null,
-        pHeight: null,
-        wWidth: null,
-        wHeight: null,
-        offsetX: 18,
-        offsetY: -16,
-        addOffset: null,
+        cooldown: 0,
+        attackRect: [[18, 27, 6, 13],[4, 22, 16, 5],[24, 22, 16, 5],[15, 5, 3, 15]] //down, left, right, up
+    },
+    pistol: {
+        name: 'Pistol',
+        image: "weapons",
+        animation: [0, 1, 2, 3],
+        spritewidth: 50,
+        spriteheight: 50,
+        rate: 225,
+        damage: 1,
+        cooldown: 0,
+        attackRect: [[18, 27, 6, 13],[4, 22, 16, 5],[24, 22, 16, 5],[15, 5, 3, 15]] //down, left, right, up
+    },
+    smg: {
+        name: 'SMG',
+        image: "weapons",
+        animation: [4, 5, 6, 7],
+        spritewidth: 50,
+        spriteheight: 50,
+        rate: 225,
+        damage: 1,
+        cooldown: 0,
+        attackRect: [[18, 27, 6, 13],[4, 22, 16, 5],[24, 22, 16, 5],[15, 5, 3, 15]] //down, left, right, up
+    },
+    bazooka: {
+        name: 'Bazooka',
+        image: "weapons",
+        animation: [8, 9, 10, 11],
+        spritewidth: 50,
+        spriteheight: 50,
+        rate: 225,
+        damage: 1,
+        cooldown: 0,
         attackRect: [[18, 27, 6, 13],[4, 22, 16, 5],[24, 22, 16, 5],[15, 5, 3, 15]] //down, left, right, up
     }
 };
