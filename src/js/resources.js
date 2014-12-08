@@ -39,7 +39,7 @@ game.resources = [
 	 * {name: "example01", type: "tmx", src: "data/map/example01.tmx"},
 	 * {name: "example01", type: "tmx", src: "data/map/example01.json"},
  	 */
-	{name: "arena01", type: "tmx", src: "data/map/arena01.tmx"}
+	{name: "arena01", type: "tmx", src: "data/map/arena01.tmx"},
 
 	/* Background music. 
 	 * @example
@@ -50,4 +50,5 @@ game.resources = [
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
+	 {name: "shoot", type: "audio", src: "data/sfx/"}
 ];

@@ -25,7 +25,7 @@ var game = {
 	}
 
 	// Initialize the audio.
-	me.audio.init("mp3,ogg");
+	me.audio.init("wav");
 
 	// Set a callback to run when loading is complete.
 	me.loader.onload = this.loaded.bind(this);
