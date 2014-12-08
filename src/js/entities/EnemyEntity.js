@@ -57,10 +57,10 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.path = null;
 		this.currentNode = 0;
 		this.nextNode = 1;
-		this.pathfindingInterval = 2000;
+		this.pathfindingInterval = 1000;
 		this.timeToPathfind = 3000;
-		this.doublejumpdelay = 900;
-		this.timetodoublej = 900;
+		this.doublejumpdelay = 250;
+		this.timetodoublej = 500;
 		this.arrived = true;
 		
 		
@@ -155,16 +155,17 @@ game.EnemyEntity = game.BaseEntity.extend({
                         this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
                         // set the jumping flag
                         this.body.jumping = true;
+						this.timetodoublej = this.doublejumpdelay;
                     }
                     else if ((this.body.jumping || this.body.falling) && !this.body.doubleJump && this.timetodoublej < 0) {
                         this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
                         this.body.doubleJump = true;
-                        this.timetodoublej = this.doublejumpdelay;
                     }
-                    else this.timetodoublej -= dt;
                 }
             }
         }
+		
+		this.timetodoublej -= dt;
         // check & update player movement
         this.body.update(dt);
 

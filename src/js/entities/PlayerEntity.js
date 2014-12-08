@@ -61,7 +61,6 @@ game.PlayerEntity = game.BaseEntity.extend({
 				else if (response.overlapV.x < 0) {		//Collided from the right
 					if(other.direction == "right" && other.attacking &&
 						other.renderable.getCurrentAnimationFrame()==1||other.renderable.getCurrentAnimationFrame()==2) {
-						console.log("Collided with enemy.");
 						kbMultiplier=4;
 					}
 					else {
