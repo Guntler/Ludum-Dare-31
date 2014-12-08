@@ -70,13 +70,14 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.doublejumpdelay = 250;
 		this.timetodoublej = 500;
 		this.arrived = true;
+		this.firstexecution = true;
 		this.spawner = spawner;
 		this.stunTime = 400;
         this.wait = 20;
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
     },
 
-    update: function(dt) {
+	 update: function(dt) {
         if(this.health<=0) {
             this.switchAnimation("die");
             this.alive = false;
@@ -109,6 +110,8 @@ game.EnemyEntity = game.BaseEntity.extend({
                 this.timeToPathfind = this.pathfindingInterval;
                 this.currentNode = 0;
                 this.nextNode = 1;
+				this.firstexecution = true;
+				//console.log(this.path);
 				if(this.path != null)
 					this.arrived = false;
             }
@@ -116,7 +119,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 
             if (this.path != null && this.path.length > 0 && this.nextNode < this.path.length && !(this.arrived)) {
                 var neighbors = this.path[this.currentNode].neighbors;
-                var needsJump = null;
+                var needsJump = false;
                 for (var i = 0; i < neighbors.length; i++) {
                     if (neighbors[i].node == this.path[this.nextNode].node) {
                         needsJump = neighbors[i].requiresJump;
@@ -124,11 +127,12 @@ game.EnemyEntity = game.BaseEntity.extend({
                 }
 
                 if (this.path[this.nextNode].position.x > this.pos.x) {
-					if(this.path[this.nextNode].node == "end" && this.direction == "left") {
+					if(this.path[this.nextNode].node == "end" && this.direction == "left" && !this.firstexecution) {
 						this.arrived = true;
 					}
 					else {
 						this.direction = "right";
+						this.firstexecution = false;
 						// unflip the sprite
 						this.renderable.flipX(false);
 						// update the entity velocity
@@ -139,11 +143,12 @@ game.EnemyEntity = game.BaseEntity.extend({
 					}
                 }
                 else if (this.path[this.nextNode].position.x < this.pos.x) {
-					if(this.path[this.nextNode].node == "end" && this.direction == "right") {
+					if(this.path[this.nextNode].node == "end" && this.direction == "right" && !this.firstexecution) {
 						this.arrived = true;
 					}
 					else {
 						this.direction = "left";
+						this.firstexecution = false;
 						// flip the sprite on horizontal axis
 						this.renderable.flipX(true);
 						// update the entity velocity

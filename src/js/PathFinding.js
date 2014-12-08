@@ -130,17 +130,24 @@ pathfinding.Astar = function(ent, ent2) {
 	var start_neighbors = [];
 	var end_neighbors = [];
 	var found = 0;
+	var atSamePlat = false;
 	
 	for(platform in pathfinding.PlatformAreas) {
+		var both = 0;
 		if(ent.getBounds().overlaps(pathfinding.PlatformAreas[platform].getBounds())) {
 			start_neighbors = pathfinding.PlatformNodes[platform];
+			both++;
 			found++;
 		}
 		
 		if(ent2.getBounds().overlaps(pathfinding.PlatformAreas[platform].getBounds())) {
 			end_neighbors = pathfinding.PlatformNodes[platform];
+			both++;
 			found++;
 		}
+		
+		if(both >= 2)
+			atSamePlat = true;
 	}
 	if(found < 2) 
 		return null;
@@ -148,6 +155,9 @@ pathfinding.Astar = function(ent, ent2) {
 	var NodeStart = {node: "start", position: {x: ent.pos.x, y: ent.pos.y}, neighbors: start_neighbors};
 	var NodeEnd = {node: "end", position: {x: ent2.pos.x, y: ent2.pos.y}, neighbors: end_neighbors};
 	
+	if(atSamePlat)
+		return [NodeStart,NodeEnd];
+		
 	openset.push(NodeStart);
 	
 	fScore = {};
