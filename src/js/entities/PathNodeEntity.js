@@ -11,13 +11,13 @@ game.PathNodeEntity = me.Entity.extend({
 
         // ensure the player is updated even when outside of the viewport
         this.alwaysUpdate = true;
-		
+
 		//this.body.removeShapeAt(0);
 		//this.body.addShape(new me.Rect(x,y,10,10));
 		this.position = this.body.pos;
 		this.neighbors = pathfinding.NavMesh[settings.type];
 		this.body.setCollisionType = me.collision.types.NO_OBJECT;
-		
+
 		pathfinding.Nodes[settings.type] = this;
     },
 

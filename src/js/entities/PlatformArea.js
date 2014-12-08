@@ -11,7 +11,7 @@ game.PlatformAreaEntity = me.Entity.extend({
 
         // ensure the player is updated even when outside of the viewport
         this.alwaysUpdate = true;
-		
+
 		this.position = this.body.pos;
 		this.body.setCollisionType = me.collision.types.NO_OBJECT;
 		
