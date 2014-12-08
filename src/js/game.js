@@ -47,6 +47,7 @@ var game = {
 		me.pool.register("bullet", game.BulletEntity, true);
 		me.pool.register("enemy", game.EnemyEntity, true);
 		me.pool.register("catbot", game.CatbotEntity, true);
+		me.pool.register("spawner", game.SpawnerEntity, true);
 		me.pool.register("PathNode", game.PathNodeEntity, true);
 		me.pool.register("PlatformArea", game.PlatformAreaEntity, true);
 

@@ -9,10 +9,13 @@ game.enemies = {
         explosiveDmg: 100,
         speedX: 30,
         speedY: 0,
-        width: 64,
+        width: 16,
         height: 64,
         spritewidth: 64,
         spriteheight: 64,
+        animations: [["stand",[0,1,2,3]],["walk",[8, 9, 10, 11]],["attack",[16,17,18,19]],
+                        ["die",[24,25,26,27,28,29,30]],["jump",[40,41,42,43,44]],["air",[45,46]]],
+        currentAnim: "stand",
         attackRect: [[18, 27, 6, 13]] //down, left, right, up
     },
     catbot: {
@@ -25,28 +28,33 @@ game.enemies = {
         explosiveDmg: 100,
         speedX: 30,
         speedY: 0,
-        width: 64,
-        height: 64,
-        spritewidth: 64,
-        spriteheight: 64,
+        width: 16,
+        height: 32,
+        spritewidth: 50,
+        spriteheight: 50,
+        animations: [["stand",[0,1,2,3,4,5]],["walk",[18,19,20,21,22,23]],["attack",[9,10,11,12,13,14]],
+                        ["die",[63,64,65,66,67,68,69,70,71]],["air",[40,41]]],
+        currentAnim: "stand",
         attackRect: [[18, 27, 6, 13]] //down, left, right, up
     }
 };
 
 game.EnemyEntity = game.BaseEntity.extend({
-    init: function(x,y,settings) {
-        //this._super(me.Entity, 'init', [x+16, y+16, {image: "skeleton", width: 16, height: 32, spritewidth: 64, spriteheight: 64}]);
-        this._super(game.BaseEntity, 'init', [x, y, settings]);
+    init: function(x,y,spawner,enemy) {
+        this.enemy = game.enemies[enemy];
 
-        this.renderable.addAnimation("walk",  [8, 9, 10, 11]);
-        // define a standing animation (using the first frame)
-        this.renderable.addAnimation("stand",  [0,1,2,3]);
-        this.renderable.addAnimation("attack",  [16,17,18,19]);
-        this.renderable.addAnimation("die",  [24,25,26,27,28,29,30],100);
-        this.renderable.addAnimation("jump",  [40,41,42,43,44]);
-        this.renderable.addAnimation("air",  [45,46]);
+        this._super(game.BaseEntity, 'init', [x+16, y+16,
+            {image: this.enemy.image, width: this.enemy.width, height: this.enemy.height,
+                spritewidth: this.enemy.spritewidth, spriteheight: this.enemy.spriteheight}]);
+
+        var i=0;
+
+        //console.log();
+        for(i=0;i<this.enemy.animations.length;i++) {
+            this.renderable.addAnimation(this.enemy.animations[i][0],  this.enemy.animations[i][1]);
+        }
         // set the standing animation as default
-        this.renderable.setCurrentAnimation("stand");
+        this.renderable.setCurrentAnimation(this.enemy.currentAnim);
 
         this.alwaysUpdate = true;
 
@@ -62,7 +70,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.doublejumpdelay = 250;
 		this.timetodoublej = 500;
 		this.arrived = true;
-		
+		this.spawner = 0;
 		
         this.wait = 20;
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
@@ -232,13 +240,7 @@ game.CatbotEntity = game.EnemyEntity.extend({
     init: function(x,y,settings) {
         //this._super(me.Entity, 'init', [x+16, y+16, {image: "skeleton", width: 16, height: 32, spritewidth: 64, spriteheight: 64}]);
         this._super(game.EnemyEntity, 'init', [x, y, settings]);
-        this.renderable.addAnimation("walk",  [8, 9, 10, 11]);
         // define a standing animation (using the first frame)
-        this.renderable.addAnimation("stand",  [0,1,2,3,4,5]);
-        this.renderable.addAnimation("attack",  [9,10,11,12,13,14]);
-        this.renderable.addAnimation("walk",  [18,19,20,21,22,23]);
-        this.renderable.addAnimation("die",  [63,64,65,66,67,68,69,70,71]);
-        this.renderable.addAnimation("air",  [40,41]);
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
 

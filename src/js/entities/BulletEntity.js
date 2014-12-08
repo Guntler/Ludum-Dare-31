@@ -57,7 +57,7 @@ game.BulletEntity = me.Entity.extend({
 
         // ensure the bullet is updated even when outside of the viewport
         this.alwaysUpdate = true;
-        this.z = 4;
+        //this.z = 4;
         this.lifetime = 5000;
         this.body.setCollisionType = me.collision.types.PROJECTILE_OBJECT;
 		this.body.addShape(new me.Rect(0,0,8,8));
