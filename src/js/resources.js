@@ -6,6 +6,7 @@ game.resources = [
 	 */
 	{name: "techblocks2_1", type:"image", src: "data/img/map/techblocks2_1.png"},
 	{name: "minimal_industry", type:"image", src: "data/img/map/minimal_industry.png"},
+	{name: "base", type:"image", src: "data/img/map/base.png"},
 	{name: "lab1",  type:"image", src: "data/img/map/lab1.png"},
     {name: "metatiles32x32",  type:"image", src: "data/img/map/metatiles32x32.png"},
 	// the main player spritesheet
