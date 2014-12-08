@@ -101,7 +101,7 @@ game.BulletEntity = me.Entity.extend({
     onCollision : function (response, other) {
         if(response.b.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
             if(this.owner.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
-                //TODO
+                return false;
             }
             else if(this.owner.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
                 response.b.hurt(10);    //TODO switch for damage
@@ -115,6 +115,7 @@ game.BulletEntity = me.Entity.extend({
                 me.game.world.removeChild(this);
                 return true;
             }
+            else{return false;}
         }
         else if(response.b.body.setCollisionType === me.collision.types.WORLD_SHAPE
             || response.b.body.setCollisionType === me.collision.types.WORLD_BOUNDARY) {
