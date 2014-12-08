@@ -58,13 +58,16 @@
    <properties>
     <property name="id" value="2"/>
     <property name="interval" value="3000"/>
-    <property name="max" value="5"/>
+    <property name="max" value="20"/>
+    <property name="maxATime" value="5"/>
    </properties>
   </object>
   <object name="spawner" x="32" y="96" width="32" height="32">
    <properties>
     <property name="id" value="1"/>
-    <property name="rate" value="5"/>
+    <property name="interval" value="3000"/>
+    <property name="max" value="20"/>
+    <property name="maxATime" value="5"/>
    </properties>
   </object>
  </objectgroup>

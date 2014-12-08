@@ -14,7 +14,7 @@ game.enemies = {
         spritewidth: 64,
         spriteheight: 64,
         animations: [["stand",[0,1,2,3]],["walk",[8, 9, 10, 11]],["attack",[16,17,18,19]],
-                        ["die",[24,25,26,27,28,29,30]],["jump",[40,41,42,43,44]],["air",[45,46]]],
+                        ["die",[24,25,26,27,28,29,30]],["air",[40,41,42,43,44]],["air",[45,46]]],
         currentAnim: "stand",
         attackRect: [[18, 27, 6, 13]] //down, left, right, up
     },
@@ -35,7 +35,8 @@ game.enemies = {
         animations: [["stand",[0,1,2,3,4,5]],["walk",[18,19,20,21,22,23]],["attack",[9,10,11,12,13,14]],
                         ["die",[63,64,65,66,67,68,69,70,71]],["air",[40,41]]],
         currentAnim: "stand",
-        attackRect: [[18, 27, 6, 13]] //down, left, right, up
+        colRect: [14, 11,16, 32],
+        attackRect: [] //down, left, right, up
     }
 };
 
@@ -60,7 +61,8 @@ game.EnemyEntity = game.BaseEntity.extend({
 
         //this.attacking = true;
         this.stunTime = 400;
-		
+        this.body.addShape(new me.Rect(this.enemy.colRect[0],this.enemy.colRect[1],
+                                this.enemy.colRect[2],this.enemy.colRect[3]));
 		
 		this.path = null;
 		this.currentNode = 0;
@@ -70,16 +72,18 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.doublejumpdelay = 250;
 		this.timetodoublej = 500;
 		this.arrived = true;
-		this.spawner = 0;
+		this.spawner = spawner;
 		
         this.wait = 20;
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
+        console.log(this.body.setCollisionType);
     },
 
     update: function(dt) {
         if(this.health<=0) {
             this.switchAnimation("die");
             this.alive = false;
+            this.spawner.amtAlive--;
             this.wait--;
             this.renderable.flicker(0);
 
@@ -155,7 +159,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 
                 if (needsJump) {
                     if (!this.body.jumping && !this.body.falling) {
-                        this.switchAnimation("jump");
+                        this.switchAnimation("air");
 
                         this.body.doubleJump = false;
                         // set current vel to the maximum defined value
