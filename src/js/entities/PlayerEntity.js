@@ -39,7 +39,7 @@ game.PlayerEntity = game.BaseEntity.extend({
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		this.shooting = false;
-
+		this.health = 120;
 		this.currentWep = null;
 		this.cooldown = 150;
 		this.lastfired = null;

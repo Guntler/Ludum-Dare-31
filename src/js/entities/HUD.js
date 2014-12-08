@@ -77,15 +77,15 @@ game.HUD.HealthItem = me.Entity.extend({
 	update : function () {
 		var health = pathfinding.playerEntity.health;
 		
-		if(health >= 50)
+		if(health >= 100)
 			this.renderable.setCurrentAnimation("health6");
-		else if(health >= 40)
+		else if(health >= 80)
 			this.renderable.setCurrentAnimation("health5");
-		else if(health >= 30)
+		else if(health >= 60)
 			this.renderable.setCurrentAnimation("health4");
-		else if(health >= 20)
+		else if(health >= 40)
 			this.renderable.setCurrentAnimation("health3");
-		else if(health >= 10)
+		else if(health >= 20)
 			this.renderable.setCurrentAnimation("health2");
 		else if(health >= 0)
 			this.renderable.setCurrentAnimation("health1");

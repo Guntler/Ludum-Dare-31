@@ -2,11 +2,11 @@ game.enemies = {
     skeledoge: {
         name: 'Skeledoge',
         image: "skeleton",
-        health:800,
-        damage: 30,
+        health:10,
+        damage: 10,
         stun: true,
         explosiveDmg: 100,
-        speedX: 2,
+        speedX: 3,
         speedY: 15,
         width: 16,
         height: 64,
@@ -21,8 +21,8 @@ game.enemies = {
     catbot: {
         name: 'Catbot',
         image: "catbot",
-        health:300,
-        damage: 30,
+        health:10,
+        damage: 10,
         stun: true,
         explosiveDmg: 100,
         speedX: 4,
@@ -64,6 +64,7 @@ game.EnemyEntity = game.BaseEntity.extend({
                                 this.enemy.colRect[2],this.enemy.colRect[3]));
 		this.damage = this.enemy.damage;
 		this.path = null;
+		this.health = this.enemy.health;
 		this.currentNode = 0;
 		this.nextNode = 1;
 		this.pathfindingInterval = 1000;
@@ -186,9 +187,9 @@ game.EnemyEntity = game.BaseEntity.extend({
                     }
                 }
 				
-				if(this.enemy.name = "Catbot") {
+				if(this.enemy.name == "Catbot") {
 					if(pathfinding.playerEntity.pos.y < this.pos.y + 50 && pathfinding.playerEntity.pos.y > this.pos.y - 50)
-						if(Math.random() > 0.8) {
+						if(Math.random() > 0.995) {
 							if(this.lastfired == null || this.lastfired <= 0) {
 								me.audio.play('laser5');
 								if(this.direction=="right")
@@ -196,7 +197,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 								else
 									me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, this));
 								this.lastfired = this.cooldown;
-								this.attacking = true;
+								//this.attacking = true;
 								//me.audio.play("shoot");
 							}
 						}
@@ -207,9 +208,9 @@ game.EnemyEntity = game.BaseEntity.extend({
 		if(this.lastfired != null)
 			this.lastfired -= dt;
 			
-		if(this.lastfired<=0) {
+		/*if(this.lastfired<=0) {
 			this.shooting = false;
-		}
+		}*/
 		
 		this.timetodoublej -= dt;
         // check & update player movement
