@@ -142,7 +142,9 @@ pathfinding.Astar = function(ent, ent2) {
 			found++;
 		}
 	}
-	if(found < 2) return null;
+	if(found < 2) 
+		return null;
+	
 	var NodeStart = {node: "start", position: {x: ent.pos.x, y: ent.pos.y}, neighbors: start_neighbors};
 	var NodeEnd = {node: "end", position: {x: ent2.pos.x, y: ent2.pos.y}, neighbors: end_neighbors};
 	

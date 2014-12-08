@@ -52,6 +52,8 @@ game.EnemyEntity = game.BaseEntity.extend({
 
         //this.attacking = true;
         this.stunTime = 400;
+		
+		
 		this.path = null;
 		this.currentNode = 0;
 		this.nextNode = 1;
@@ -59,6 +61,9 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.timeToPathfind = 3000;
 		this.doublejumpdelay = 900;
 		this.timetodoublej = 900;
+		this.arrived = true;
+		
+		
         this.wait = 20;
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
     },
@@ -88,15 +93,18 @@ game.EnemyEntity = game.BaseEntity.extend({
         }
 
         if (!this.isHurt) {
-            if (this.timeToPathfind <= 0) {
+			
+            if (this.timeToPathfind <= 0 || this.arrived) {
                 this.path = pathfinding.Astar(this, pathfinding.playerEntity);
                 this.timeToPathfind = this.pathfindingInterval;
                 this.currentNode = 0;
                 this.nextNode = 1;
+				if(this.path != null)
+					this.arrived = false;
             }
             else this.timeToPathfind -= dt;
 
-            if (this.path != null && this.path.length > 0 && this.nextNode < this.path.length) {
+            if (this.path != null && this.path.length > 0 && this.nextNode < this.path.length && !(this.arrived)) {
                 var neighbors = this.path[this.currentNode].neighbors;
                 var needsJump = null;
                 for (var i = 0; i < neighbors.length; i++) {
@@ -106,26 +114,35 @@ game.EnemyEntity = game.BaseEntity.extend({
                 }
 
                 if (this.path[this.nextNode].position.x > this.pos.x) {
-
-                    this.direction = "right";
-                    // unflip the sprite
-                    this.renderable.flipX(false);
-                    // update the entity velocity
-                    this.body.vel.x += this.body.accel.x * me.timer.tick;
-                    if (!this.jumping && !this.falling) {
-                        this.switchAnimation("walk");
-                    }
+					if(this.path[this.nextNode].node == "end" && this.direction == "left") {
+						this.arrived = true;
+					}
+					else {
+						this.direction = "right";
+						// unflip the sprite
+						this.renderable.flipX(false);
+						// update the entity velocity
+						this.body.vel.x += this.body.accel.x * me.timer.tick;
+						if (!this.jumping && !this.falling) {
+							this.switchAnimation("walk");
+						}
+					}
                 }
                 else if (this.path[this.nextNode].position.x < this.pos.x) {
-                    this.direction = "left";
-                    // flip the sprite on horizontal axis
-                    this.renderable.flipX(true);
-                    // update the entity velocity
-                    this.body.vel.x -= this.body.accel.x * me.timer.tick;
+					if(this.path[this.nextNode].node == "end" && this.direction == "right") {
+						this.arrived = true;
+					}
+					else {
+						this.direction = "left";
+						// flip the sprite on horizontal axis
+						this.renderable.flipX(true);
+						// update the entity velocity
+						this.body.vel.x -= this.body.accel.x * me.timer.tick;
 
-                    if (!this.jumping && !this.falling) {
-                        this.switchAnimation("walk");
-                    }
+						if (!this.jumping && !this.falling) {
+							this.switchAnimation("walk");
+						}
+					}
                 }
 
                 if (needsJump) {
