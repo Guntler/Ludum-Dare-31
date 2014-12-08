@@ -18,7 +18,7 @@ game.BaseEntity = me.Entity.extend({
         // ensure the player is updated even when outside of the viewport
         this.alwaysUpdate = true;
         this.invincible = false;
-        this.health = 100;
+        this.health = 60;
         this.direction = "right";
         this.isHurt = false;
         this.stunnedTime = 0;

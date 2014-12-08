@@ -36,6 +36,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.currentWep = null;
 		this.cooldown = 150;
 		this.lastfired = null;
+		this.score = 0;
 		
 		pathfinding.playerEntity = this;
     },
@@ -78,7 +79,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 				this.isHurt = true;
 				this.stunnedTime = stunMultiplier*other.stunTime;
 				this.renderable.flicker(this.stunnedTime);
-				this.hurt(20);
+				this.hurt(10);
 			}
 			return true;
 		}

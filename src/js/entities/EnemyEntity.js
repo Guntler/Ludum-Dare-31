@@ -77,6 +77,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 
             if(this.wait<=0) {
                 me.game.world.removeChild(this);
+				pathfinding.playerEntity.score += 100;
             }
         }
 
