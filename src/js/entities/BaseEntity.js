@@ -17,8 +17,10 @@ game.BaseEntity = me.Entity.extend({
 
         // ensure the player is updated even when outside of the viewport
         this.alwaysUpdate = true;
+        this.invincible = false;
         this.health = 100;
         this.direction = "right";
+        this.isHurt = false;
     },
 
     onCollision : function (response, other) {
@@ -28,6 +30,13 @@ game.BaseEntity = me.Entity.extend({
 
     hurt: function(val) {
         this.health-=val;
+    },
+
+    switchAnimation : function(name) {
+        if (!this.renderable.isCurrentAnimation(name)) {
+            this.renderable.setAnimationFrame();
+            this.renderable.setCurrentAnimation(name);
+        }
     }
 })
 
