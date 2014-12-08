@@ -44,11 +44,13 @@ game.resources = [
 	/* Background music. 
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
-	 */	
+	 */
+	{name: "dramatic", type: "audio", src: "data/bgm/"},
 
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
-	 {name: "shoot", type: "audio", src: "data/sfx/"}
+	{name: "laser5", type: "audio", src: "data/sfx/"},
+	{name: "explosion", type: "audio", src: "data/sfx/"}
 ];

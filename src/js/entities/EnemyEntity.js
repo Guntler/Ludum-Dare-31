@@ -81,6 +81,10 @@ game.EnemyEntity = game.BaseEntity.extend({
 
 	 update: function(dt) {
         if(this.health<=0) {
+            if(!this.playedDead) {
+                me.audio.play('explosion');
+                this.playedDead = true;
+            }
             this.switchAnimation("die");
             this.alive = false;
             this.spawner.amtAlive--;
@@ -219,7 +223,7 @@ game.EnemyEntity = game.BaseEntity.extend({
                 this.stunnedTime = stunMultiplier*400;
                 this.renderable.flicker(this.stunnedTime);
                 this.isHurt = true;
-                this.hurt(20);
+                //this.hurt(20);
                 return false;
             }
         }
