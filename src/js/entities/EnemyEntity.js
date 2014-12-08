@@ -159,6 +159,9 @@ game.EnemyEntity = game.BaseEntity.extend({
             }
             return false;
         }
+        else if(other.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
+            return false;
+        }
         else if (other.body.setCollisionType === me.collision.types.NO_OBJECT) {
 			if(other.node != undefined && other.node != null && this.path != null && other.node == this.path[this.nextNode].node) {
 				this.nextNode++;
@@ -188,7 +191,7 @@ game.CatbotEntity = game.EnemyEntity.extend({
 
         this.alwaysUpdate = true;
 
-        this.attacking = true;
+        this.attacking = false;
         this.stunTime = 400;
 
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;

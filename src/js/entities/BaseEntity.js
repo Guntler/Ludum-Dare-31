@@ -29,6 +29,7 @@ game.BaseEntity = me.Entity.extend({
     },
 
     hurt: function(val) {
+        console.log("HURT!");
         this.health-=val;
     },
 
