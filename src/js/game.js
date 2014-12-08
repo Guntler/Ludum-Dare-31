@@ -56,7 +56,7 @@ var game = {
 		me.input.bindKey(me.input.KEY.LEFT,  "left");
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
 		me.input.bindKey(me.input.KEY.X,     "jump", true);
-		me.input.bindKey(me.input.KEY.SPACE, "shoot", true);
+		me.input.bindKey(me.input.KEY.C, "shoot", true);
 		
 		// Start the game.
 		me.state.change(me.state.PLAY);

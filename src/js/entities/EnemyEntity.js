@@ -74,6 +74,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.spawner = spawner;
 		this.stunTime = 400;
         this.wait = 20;
+		//this.body.setMaxVelocity(3, 15);
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
     },
 
