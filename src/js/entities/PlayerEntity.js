@@ -196,7 +196,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 					me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, this));
 				this.lastfired = this.cooldown;
 				this.shooting = true;
-				me.audio.play("shoot");
+				//me.audio.play("shoot");
 			}
 		}
 	},
