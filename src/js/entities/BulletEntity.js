@@ -51,7 +51,7 @@ game.BulletEntity = me.Entity.extend({
         this.owner = owner;
         this.direction = this.owner.direction;
         // set the default horizontal & vertical speed (accel vector)
-        this.body.setVelocity(20, 0);
+        this.body.setVelocity(40, 0);
         //this.body.setMaxVelocity(vx, vy);
 
 
@@ -60,7 +60,6 @@ game.BulletEntity = me.Entity.extend({
         this.z = 4;
         this.lifetime = 5000;
         this.body.setCollisionType = me.collision.types.PROJECTILE_OBJECT;
-
 		this.body.addShape(new me.Rect(0,0,8,8));
         this.updated = false;
 
@@ -101,7 +100,7 @@ game.BulletEntity = me.Entity.extend({
     onCollision : function (response, other) {
         if(response.b.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
             if(this.owner.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
-                //TODO
+                return false;
             }
             else if(this.owner.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
                 response.b.hurt(10);    //TODO switch for damage
@@ -115,6 +114,7 @@ game.BulletEntity = me.Entity.extend({
                 me.game.world.removeChild(this);
                 return true;
             }
+            else{return false;}
         }
         else if(response.b.body.setCollisionType === me.collision.types.WORLD_SHAPE
             || response.b.body.setCollisionType === me.collision.types.WORLD_BOUNDARY) {
@@ -123,6 +123,7 @@ game.BulletEntity = me.Entity.extend({
             return true;
         }
         else if (other.body.setCollisionType === me.collision.types.NO_OBJECT) {
+            console.log("HERE");
             return false;
         }
         else {return false;}

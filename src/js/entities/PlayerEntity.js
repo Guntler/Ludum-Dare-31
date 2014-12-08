@@ -19,6 +19,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.renderable.addAnimation("walkshoot",  [100,101,102,103,104,105,106,107],100);
 		this.renderable.addAnimation("jumphold",  [110,111,112,113]);
 		this.renderable.addAnimation("airhold",  [114,115]);
+		this.renderable.addAnimation("hurt",  [0,1,2,1]);
 		this.renderable.addAnimation("airshoot",  [125,124],100);
         // set the standing animation as default
         this.renderable.setCurrentAnimation("stand");
@@ -33,7 +34,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.shooting = false;
 
 		this.currentWep = null;
-		this.cooldown = 100;
+		this.cooldown = 150;
 		this.lastfired = null;
 		
 		pathfinding.playerEntity = this;
@@ -206,8 +207,10 @@ game.PlayerEntity = game.BaseEntity.extend({
 			this.isHurt = false;
 			this.stunnedTime = 0;
 		}
-		else
+		else {
+			this.switchAnimation("hurt");
 			this.stunnedTime -= dt;
+		}
 
 		if(!this.isHurt) {
 			this.handleInput();
