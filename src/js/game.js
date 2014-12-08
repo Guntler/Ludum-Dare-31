@@ -41,6 +41,7 @@ var game = {
 	"loaded" : function () {
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
+		me.state.set(me.state.DEATH, new game.DeathScreen());
 		
 		// register our player entity in the object pool
 		me.pool.register("mainPlayer", game.PlayerEntity);
