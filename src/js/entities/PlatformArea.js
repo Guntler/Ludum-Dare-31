@@ -15,8 +15,8 @@ game.PlatformAreaEntity = me.Entity.extend({
 		this.position = this.body.pos;
 		this.body.setCollisionType = me.collision.types.NO_OBJECT;
 		
-		pathfinding.PlatformAreas[settings.type] = this;
 		this.area = settings.type;
+		pathfinding.PlatformAreas[settings.type] = this;
     },
 
     onCollision : function (response, other) {

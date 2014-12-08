@@ -94,13 +94,13 @@ pathfinding.NavMesh = {
 };
 
 pathfinding.PlatformNodes = {
-	"Platform1": ["Node1","Node2"],
-	"Platform2": ["Node3","Node6","Node8"],
-	"Platform3": ["Node4","Node5","Node7"],
-	"Platform4": ["Node13","Node16"],
-	"Platform5": ["Node9","Node10","Node11","Node12"],
-	"Platform6": ["Node14","Node15"],
-	"Platform7": ["Node17","Node18","Node19","Node20","Node21"]
+	"Platform1": [{node:"Node1",requiresJump:false},{node:"Node2",requiresJump:false}],
+	"Platform2": [{node:"Node3",requiresJump:false},{node:"Node6",requiresJump:false},{node:"Node8",requiresJump:false}],
+	"Platform3": [{node:"Node4",requiresJump:false},{node:"Node5",requiresJump:false},{node:"Node7",requiresJump:false}],
+	"Platform4": [{node:"Node13",requiresJump:false},{node:"Node16",requiresJump:false}],
+	"Platform5": [{node:"Node9",requiresJump:false},{node:"Node10",requiresJump:false},{node:"Node11",requiresJump:false},{node:"Node12",requiresJump:false}],
+	"Platform6": [{node:"Node14",requiresJump:false},{node:"Node15",requiresJump:false}],
+	"Platform7": [{node:"Node17",requiresJump:false},{node:"Node18",requiresJump:false},{node:"Node19",requiresJump:false},{node:"Node20",requiresJump:false},{node:"Node21",requiresJump:false}]
 };
 
 pathfinding.PlatformAreas = {};
@@ -116,76 +116,98 @@ pathfinding.CalculateCost = function(start, dest) {
 	 
 	ys = dest.y - start.y;
 	ys = ys * ys;
-	 
 	return Math.sqrt( xs + ys );
 };
 
 pathfinding.Astar = function(ent, ent2) {
 	closedset = [];
 	openset = [];
-	camefrom = [];
+	camefrom = {};
 	
 	gScore = {};
 	gScore["start"] = 0;
 	
 	var start_neighbors = [];
 	var end_neighbors = [];
+	var found = 0;
 	
-	for(var i = 0; i < pathfinding.PlatformAreas; i++) {
-		if(ent.body.getBounds().overlaps(pathfinding.PlatformAreas[i].body.getBounds()) {
-			start_neighbors = pathfinding.PlatformNodes[pathfinding.PlatformAreas[i]];
+	for(platform in pathfinding.PlatformAreas) {
+		if(ent.getBounds().overlaps(pathfinding.PlatformAreas[platform].getBounds())) {
+			start_neighbors = pathfinding.PlatformNodes[platform];
+			found++;
 		}
 		
-		if(ent2.body.getBounds().overlaps(pathfinding.PlatformAreas[i].body.getBounds()) {
-			end_neighbors = pathfinding.PlatformNodes[pathfinding.PlatformAreas[i]];
+		if(ent2.getBounds().overlaps(pathfinding.PlatformAreas[platform].getBounds())) {
+			end_neighbors = pathfinding.PlatformNodes[platform];
+			found++;
 		}
 	}
-	
-	var NodeStart = {node: "start", position: {x: ent.body.pos.x, y: ent.body.pos.y}, neighbors: start_neighbors};
-	var NodeEnd = {node: "end", position: {x: ent2.body.pos.x, y: ent2.body.pos.y}, neighbors: end_neighbors};
+	if(found < 2) return null;
+	var NodeStart = {node: "start", position: {x: ent.pos.x, y: ent.pos.y}, neighbors: start_neighbors};
+	var NodeEnd = {node: "end", position: {x: ent2.pos.x, y: ent2.pos.y}, neighbors: end_neighbors};
 	
 	openset.push(NodeStart);
 	
 	fScore = {};
-	fScore["start"] := g_score["start"] + game.pathFinding.CalculateCost(NodeStart.position, NodeEnd.position);
-	
+	fScore["start"] = gScore["start"] + pathfinding.CalculateCost(NodeStart.position, NodeEnd.position);
 	while(openset.length > 0) {
 		var min = null;
 		var current = null;
+		
 		for(var i = 0; i < openset.length; i++) {
 			if(current == null) {
 				current = openset[i];
 				min = fScore[openset[i].node];
 			}
-			else if (fScore[openset[i].orig] < min) {
+			else if (fScore[openset[i].node] < min) {
 				current = openset[i];
 				min = fScore[openset[i].node];
 			}
 		}
 		
 		if(current != null) {
-		
 			for(var i = 0; i < end_neighbors.length; i++) {
-				if(end_neighbors[i] == current.node) {
-					return GetPath(camefrom, NodeEnd);
+				if(end_neighbors[i].node == current.node) {
+					return pathfinding.GetPath(camefrom, current, NodeEnd);
 				}
 			}
 			
 			var index = openset.indexOf(current);
 			if (index > -1) {
-				array.splice(index, 1);
+				openset.splice(index, 1);
 			}
 			
 			closedset.push(current);
 			
 			for(var i = 0; i < current.neighbors.length; i++) {
-				if(closedset.indexOf(current.neighbors[i]) != -1)
+				if(closedset.indexOf(pathfinding.Nodes[current.neighbors[i].node]) != -1)
 					continue;
 				var neighbor = pathfinding.Nodes[current.neighbors[i].node];
-				var tentative_g_score = gScore[current.orig] + game.pathFinding.CalculateCost(current, current.neighbors[i]);
+				var tentative_g_score = gScore[current.node] + pathfinding.CalculateCost(current.position, neighbor.position);
+				
+				if(openset.indexOf(neighbor) < 0 || gScore[neighbor.node] == undefined && tentative_g_score < gScore[neighbor.node] ) {
+					camefrom[neighbor.node] = current;
+					gScore[neighbor.node] = tentative_g_score;
+					fScore[neighbor.node] = gScore[neighbor.node] + pathfinding.CalculateCost(neighbor.position, NodeEnd.position);
+					
+					if(openset.indexOf(neighbor) < 0)
+						openset.push(neighbor);
+				}
 			}
-			
-			//TODO finish this
 		}
 	}
+	
+	return null;
+}
+
+pathfinding.GetPath = function(camefrom, current, NodeEnd) {
+	var totalPath = [current];
+	while(camefrom[current.node] != undefined) {
+		current = camefrom[current.node];
+		totalPath.push(current);
+	}
+	
+	totalPath = totalPath.reverse();
+	totalPath.push(NodeEnd);
+	return totalPath;
 }

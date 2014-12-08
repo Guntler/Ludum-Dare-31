@@ -35,6 +35,8 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.currentWep = null;
 		this.cooldown = 100;
 		this.lastfired = null;
+		
+		pathfinding.playerEntity = this;
     },
 
 	equipWep: function(weapon) {
