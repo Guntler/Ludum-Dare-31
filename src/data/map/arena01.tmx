@@ -116,8 +116,8 @@
   <object name="PathNode" type="Node2" x="850" y="108" width="12" height="13"/>
   <object name="PathNode" type="Node3" x="485" y="267" width="12" height="14"/>
   <object name="PathNode" type="Node4" x="811" y="262" width="15" height="16"/>
-  <object name="PathNode" type="Node5" x="995" y="210" width="16" height="15"/>
-  <object name="PathNode" type="Node6" x="304" y="208" width="14" height="16"/>
+  <object name="PathNode" type="Node5" x="980" y="226" width="16" height="15"/>
+  <object name="PathNode" type="Node6" x="354" y="258" width="14" height="16"/>
   <object name="PathNode" type="Node7" x="1227" y="195" width="14" height="17"/>
   <object name="PathNode" type="Node8" x="41" y="203" width="15" height="14"/>
   <object name="PathNode" type="Node9" x="675" y="404" width="17" height="19"/>

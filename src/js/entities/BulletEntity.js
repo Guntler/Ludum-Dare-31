@@ -53,7 +53,7 @@ game.BulletEntity = me.Entity.extend({
         // set the default horizontal & vertical speed (accel vector)
         this.body.setVelocity(40, 0);
         //this.body.setMaxVelocity(vx, vy);
-
+	
 
         // ensure the bullet is updated even when outside of the viewport
         this.alwaysUpdate = true;
