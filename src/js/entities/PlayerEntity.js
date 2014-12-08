@@ -30,7 +30,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 		
 		// set the display to follow our position on both axis
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-		this.stunnedTime = 0;
+
 		this.shooting = false;
 
 		this.currentWep = null;

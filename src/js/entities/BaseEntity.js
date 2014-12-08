@@ -21,6 +21,8 @@ game.BaseEntity = me.Entity.extend({
         this.health = 100;
         this.direction = "right";
         this.isHurt = false;
+        this.stunnedTime = 0;
+        this.alive = true;
     },
 
     onCollision : function (response, other) {

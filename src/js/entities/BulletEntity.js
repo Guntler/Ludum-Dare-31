@@ -123,7 +123,6 @@ game.BulletEntity = me.Entity.extend({
             return true;
         }
         else if (other.body.setCollisionType === me.collision.types.NO_OBJECT) {
-            console.log("HERE");
             return false;
         }
         else {return false;}

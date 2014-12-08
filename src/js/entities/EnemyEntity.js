@@ -42,7 +42,7 @@ game.EnemyEntity = game.BaseEntity.extend({
         // define a standing animation (using the first frame)
         this.renderable.addAnimation("stand",  [0,1,2,3]);
         this.renderable.addAnimation("attack",  [16,17,18,19]);
-        this.renderable.addAnimation("die",  [24,25,26,27,28,29,30]);
+        this.renderable.addAnimation("die",  [24,25,26,27,28,29,30],100);
         this.renderable.addAnimation("jump",  [40,41,42,43,44]);
         this.renderable.addAnimation("air",  [45,46]);
         // set the standing animation as default
@@ -59,71 +59,95 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.timeToPathfind = 3000;
 		this.doublejumpdelay = 900;
 		this.timetodoublej = 900;
-
+        this.wait = 20;
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
     },
 
     update: function(dt) {
-	
-		if(this.timeToPathfind <= 0) {
-			this.path = pathfinding.Astar(this,pathfinding.playerEntity);
-			this.timeToPathfind = this.pathfindingInterval;
-			this.currentNode = 0;
-			this.nextNode = 1;
-		}
-		else this.timeToPathfind -= dt;
-			
-		if(this.path != null && this.path.length > 0 && this.nextNode < this.path.length) {
-			var neighbors = this.path[this.currentNode].neighbors;
-			var needsJump = null;
-			for(var i = 0; i < neighbors.length; i++) {
-				if(neighbors[i].node == this.path[this.nextNode].node) {
-					needsJump = neighbors[i].requiresJump;
-				}
-			}
-			
-			if(this.path[this.nextNode].position.x > this.pos.x) {
-			
-				this.direction = "right";
-				// unflip the sprite
-				this.renderable.flipX(false);
-				// update the entity velocity
-				this.body.vel.x += this.body.accel.x * me.timer.tick;
-				if(!this.jumping&&!this.falling) {
-					this.switchAnimation("walk");
-				}
-			}
-			else if (this.path[this.nextNode].position.x < this.pos.x) {
-				this.direction = "left";
-				// flip the sprite on horizontal axis
-				this.renderable.flipX(true);
-				// update the entity velocity
-				this.body.vel.x -= this.body.accel.x * me.timer.tick;
+        if(this.health<=0) {
+            this.switchAnimation("die");
+            this.alive = false;
+            this.wait--;
+            this.renderable.flicker(0);
 
-				if(!this.jumping&&!this.falling) {
-					this.switchAnimation("walk");
-				}
-			}
-			
-			if(needsJump) {
-				if (!this.body.jumping && !this.body.falling) {
-					this.switchAnimation("jump");
-				
-					this.body.doubleJump = false;
-					// set current vel to the maximum defined value
-					// gravity will then do the rest
-					this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
-					// set the jumping flag
-					this.body.jumping = true;
-				}
-				else if((this.body.jumping || this.body.falling) && !this.body.doubleJump && this.timetodoublej < 0) {
-					this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
-					this.body.doubleJump = true;
-					this.timetodoublej = this.doublejumpdelay;
-				}
-				else this.timetodoublej-=dt;
-			}
-		}
+            if(this.wait<=0) {
+                me.game.world.removeChild(this);
+            }
+        }
+
+        if(!this.alive) {
+            return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x!=0 || this.body.vel.y!=0);
+        }
+
+        if (this.stunnedTime <= 0) {
+            this.isHurt = false;
+            this.stunnedTime = 0;
+        }
+        else {
+            this.stunnedTime -= dt;
+        }
+
+        if (!this.isHurt) {
+            if (this.timeToPathfind <= 0) {
+                this.path = pathfinding.Astar(this, pathfinding.playerEntity);
+                this.timeToPathfind = this.pathfindingInterval;
+                this.currentNode = 0;
+                this.nextNode = 1;
+            }
+            else this.timeToPathfind -= dt;
+
+            if (this.path != null && this.path.length > 0 && this.nextNode < this.path.length) {
+                var neighbors = this.path[this.currentNode].neighbors;
+                var needsJump = null;
+                for (var i = 0; i < neighbors.length; i++) {
+                    if (neighbors[i].node == this.path[this.nextNode].node) {
+                        needsJump = neighbors[i].requiresJump;
+                    }
+                }
+
+                if (this.path[this.nextNode].position.x > this.pos.x) {
+
+                    this.direction = "right";
+                    // unflip the sprite
+                    this.renderable.flipX(false);
+                    // update the entity velocity
+                    this.body.vel.x += this.body.accel.x * me.timer.tick;
+                    if (!this.jumping && !this.falling) {
+                        this.switchAnimation("walk");
+                    }
+                }
+                else if (this.path[this.nextNode].position.x < this.pos.x) {
+                    this.direction = "left";
+                    // flip the sprite on horizontal axis
+                    this.renderable.flipX(true);
+                    // update the entity velocity
+                    this.body.vel.x -= this.body.accel.x * me.timer.tick;
+
+                    if (!this.jumping && !this.falling) {
+                        this.switchAnimation("walk");
+                    }
+                }
+
+                if (needsJump) {
+                    if (!this.body.jumping && !this.body.falling) {
+                        this.switchAnimation("jump");
+
+                        this.body.doubleJump = false;
+                        // set current vel to the maximum defined value
+                        // gravity will then do the rest
+                        this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
+                        // set the jumping flag
+                        this.body.jumping = true;
+                    }
+                    else if ((this.body.jumping || this.body.falling) && !this.body.doubleJump && this.timetodoublej < 0) {
+                        this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
+                        this.body.doubleJump = true;
+                        this.timetodoublej = this.doublejumpdelay;
+                    }
+                    else this.timetodoublej -= dt;
+                }
+            }
+        }
         // check & update player movement
         this.body.update(dt);
 
@@ -144,11 +168,23 @@ game.EnemyEntity = game.BaseEntity.extend({
     onCollision : function (response, other) {
         if(other.body.setCollisionType === me.collision.types.PROJECTILE_OBJECT) {
             if(other.owner.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
-                //TODO
+                return false;
             }
             else if(other.owner.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
-                if(!other.owner.invincible)
-                    this.hurt(20);
+                var kbMultiplier = 0;
+                var stunMultiplier = 1;
+                if (response.overlapV.x > 0) {
+                    kbMultiplier=-1;
+                }
+                else if (response.overlapV.x < 0) {
+                    kbMultiplier=1;
+                }
+                this.body.vel.x = kbMultiplier*500;
+                this.body.vel.y = -5;
+                this.stunnedTime = stunMultiplier*400;
+                this.renderable.flicker(this.stunnedTime);
+                this.isHurt = true;
+                this.hurt(20);
                 return false;
             }
         }
@@ -178,7 +214,6 @@ game.CatbotEntity = game.EnemyEntity.extend({
     init: function(x,y,settings) {
         //this._super(me.Entity, 'init', [x+16, y+16, {image: "skeleton", width: 16, height: 32, spritewidth: 64, spriteheight: 64}]);
         this._super(game.EnemyEntity, 'init', [x, y, settings]);
-
         this.renderable.addAnimation("walk",  [8, 9, 10, 11]);
         // define a standing animation (using the first frame)
         this.renderable.addAnimation("stand",  [0,1,2,3,4,5]);
