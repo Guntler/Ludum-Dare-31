@@ -2,8 +2,7 @@ game.enemies = {
     skeledoge: {
         name: 'Skeledoge',
         image: "skeleton",
-        animation: [2, 3, 4, 5],
-        health:300,
+        health:800,
         damage: 30,
         stun: true,
         explosiveDmg: 100,
@@ -14,15 +13,15 @@ game.enemies = {
         spritewidth: 64,
         spriteheight: 64,
         animations: [["stand",[0,1,2,3]],["walk",[8, 9, 10, 11]],["attack",[16,17,18,19]],
-                        ["die",[24,25,26,27,28,29,30]],["air",[40,41,42,43,44]],["air",[45,46]]],
+                        ["die",[24,25,26,27,28,29,30]],["jump",[40,41,42,43,44]],["air",[45,46]]],
         currentAnim: "stand",
+        colRect: [14, 11,16, 64],
         attackRect: [[18, 27, 6, 13]] //down, left, right, up
     },
     catbot: {
         name: 'Catbot',
         image: "catbot",
-        animation: [2, 3, 4, 5],
-        health:300,
+        health:400,
         damage: 30,
         stun: true,
         explosiveDmg: 100,
@@ -60,10 +59,9 @@ game.EnemyEntity = game.BaseEntity.extend({
         this.alwaysUpdate = true;
 
         //this.attacking = true;
-        this.stunTime = 400;
         this.body.addShape(new me.Rect(this.enemy.colRect[0],this.enemy.colRect[1],
                                 this.enemy.colRect[2],this.enemy.colRect[3]));
-		
+		this.damage = this.enemy.damage;
 		this.path = null;
 		this.currentNode = 0;
 		this.nextNode = 1;
@@ -73,10 +71,9 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.timetodoublej = 500;
 		this.arrived = true;
 		this.spawner = spawner;
-		
+		this.stunTime = 400;
         this.wait = 20;
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
-        console.log(this.body.setCollisionType);
     },
 
     update: function(dt) {

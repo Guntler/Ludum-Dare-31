@@ -17,6 +17,9 @@ game.SpawnerEntity = me.Entity.extend({
         this.maxATime = settings.maxATime;
         this._super(me.Entity, 'init', [x, y, settings]);
 
+        this.catbots = settings.catbot;
+        this.skeledoges = settings.skeledoge;
+
         this.body.setCollisionType = me.collision.types.NO_OBJECT;
 
         // ensure the player is updated even when outside of the viewport
@@ -28,8 +31,23 @@ game.SpawnerEntity = me.Entity.extend({
         return false;
     },
 
-    spawn: function(enemy) {
-        me.game.world.addChild(new me.pool.pull("enemy", this.pos.x, this.pos.y-32, this, "catbot"));
+    spawn: function() {
+        var valid = false;
+        while(!valid) {
+            var enemy = Math.floor((Math.random() * 2) + 1);
+
+            if (enemy == 1 && this.catbots > 0) {
+                enemy = "catbot";
+                this.catbots--;
+                valid = true;
+            }
+            else if (enemy == 2 && this.skeledoges > 0) {
+                enemy = "skeledoge";
+                this.skeledoge--;
+                valid = true;
+            }
+        }
+        me.game.world.addChild(new me.pool.pull("enemy", this.pos.x, this.pos.y-32, this, enemy));
         this.elapsed = this.interval;
         this.spawned++;
         this.amtAlive++;
@@ -37,7 +55,7 @@ game.SpawnerEntity = me.Entity.extend({
 
     update: function(dt) {
         if(this.elapsed <= 0 && !this.exhausted && this.amtAlive<this.maxATime) {
-            this.spawn(null);
+            this.spawn();
         }
         else {
             this.elapsed -= dt;
