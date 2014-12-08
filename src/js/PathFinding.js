@@ -2,100 +2,108 @@ pathfinding = {};
 
 pathfinding.NavMesh = {
 	"Node1":[
-						{dest: "Node2", requiresJump: false},
-						{dest: "Node6", requiresJump: false}
+						{node: "Node2", requiresJump: false},
+						{node: "Node6", requiresJump: false}
 			],
 	"Node2":[
-						{dest: "Node1", requiresJump: false},
-						{dest: "Node5", requiresJump: false}
+						{node: "Node1", requiresJump: false},
+						{node: "Node5", requiresJump: false}
 			],
 	"Node3":[
-						{dest: "Node6", requiresJump: false},
-						{dest: "Node10", requiresJump: false}
+						{node: "Node6", requiresJump: false},
+						{node: "Node10", requiresJump: false}
 			],
 	"Node4":[
-						{dest: "Node9", requiresJump: false},
-						{dest: "Node5", requiresJump: false}
+						{node: "Node9", requiresJump: false},
+						{node: "Node5", requiresJump: false}
 			],
 	"Node5":[
-						{dest: "Node2", requiresJump: true},
-						{dest: "Node4", requiresJump: false},
-						{dest: "Node7", requiresJump: false}
+						{node: "Node2", requiresJump: true},
+						{node: "Node4", requiresJump: false},
+						{node: "Node7", requiresJump: false}
 			],
 	"Node6":[
-						{dest: "Node1", requiresJump: true},
-						{dest: "Node3", requiresJump: false},
-						{dest: "Node8", requiresJump: false},
+						{node: "Node1", requiresJump: true},
+						{node: "Node3", requiresJump: false},
+						{node: "Node8", requiresJump: false},
 			],
 	"Node7":[
-						{dest: "Node5", requiresJump: false}
+						{node: "Node5", requiresJump: false}
 			],
 	"Node8":[
-						{dest: "Node6", requiresJump: false}
+						{node: "Node6", requiresJump: false}
 			],
 	"Node9":[
-						{dest: "Node4", requiresJump: true},
-						{dest: "Node10", requiresJump: false},
-						{dest: "Node11", requiresJump: false},
+						{node: "Node4", requiresJump: true},
+						{node: "Node10", requiresJump: false},
+						{node: "Node11", requiresJump: false},
 			],
 	"Node10":[
-						{dest: "Node3", requiresJump: true},
-						{dest: "Node9", requiresJump: false},
-						{dest: "Node12", requiresJump: false},
+						{node: "Node3", requiresJump: true},
+						{node: "Node9", requiresJump: false},
+						{node: "Node12", requiresJump: false},
 			],
 	"Node11":[
-						{dest: "Node17", requiresJump: true},
-						{dest: "Node14", requiresJump: false},
-						{dest: "Node9", requiresJump: false},
+						{node: "Node17", requiresJump: true},
+						{node: "Node14", requiresJump: false},
+						{node: "Node9", requiresJump: false},
 			],
 	"Node12":[
-						{dest: "Node13", requiresJump: true},
-						{dest: "Node18", requiresJump: false},
-						{dest: "Node10", requiresJump: false},
+						{node: "Node13", requiresJump: true},
+						{node: "Node18", requiresJump: false},
+						{node: "Node10", requiresJump: false},
 			],
 	"Node13":[
-						{dest: "Node12", requiresJump: true},
-						{dest: "Node18", requiresJump: false},
-						{dest: "Node16", requiresJump: false},
+						{node: "Node12", requiresJump: true},
+						{node: "Node18", requiresJump: false},
+						{node: "Node16", requiresJump: false},
 			],
 	"Node14":[
-						{dest: "Node11", requiresJump: true},
-						{dest: "Node17", requiresJump: false},
-						{dest: "Node15", requiresJump: false},
+						{node: "Node11", requiresJump: true},
+						{node: "Node17", requiresJump: false},
+						{node: "Node15", requiresJump: false},
 			],
 	"Node15":[
-						{dest: "Node14", requiresJump: false}
+						{node: "Node14", requiresJump: false}
 			],
 	"Node16":[
-						{dest: "Node13", requiresJump: false}
+						{node: "Node13", requiresJump: false}
 			],
 	"Node17":[
-						{dest: "Node11", requiresJump: true},
-						{dest: "Node14", requiresJump: true},
-						{dest: "Node21", requiresJump: false},
-						{dest: "Node19", requiresJump: false},
+						{node: "Node11", requiresJump: true},
+						{node: "Node14", requiresJump: true},
+						{node: "Node21", requiresJump: false},
+						{node: "Node19", requiresJump: false},
 			],
 	"Node18":[
-						{dest: "Node13", requiresJump: true},
-						{dest: "Node12", requiresJump: true},
-						{dest: "Node20", requiresJump: false},
-						{dest: "Node19", requiresJump: false},
+						{node: "Node13", requiresJump: true},
+						{node: "Node12", requiresJump: true},
+						{node: "Node20", requiresJump: false},
+						{node: "Node19", requiresJump: false},
 			],
 	"Node19":[
-						{dest: "Node17", requiresJump: false},
-						{dest: "Node18", requiresJump: false},
+						{node: "Node17", requiresJump: false},
+						{node: "Node18", requiresJump: false},
 			],
 	"Node20":[
-						{dest: "Node18", requiresJump: false}
+						{node: "Node18", requiresJump: false}
 			],
 	"Node21":[
-						{dest: "Node17", requiresJump: false}
+						{node: "Node17", requiresJump: false}
 			]
 };
 
-/*pathfinding.PlatformAreas = {
-	"Platform1"
-}*/
+pathfinding.PlatformNodes = {
+	"Platform1": ["Node1","Node2"],
+	"Platform2": ["Node3","Node6","Node8"],
+	"Platform3": ["Node4","Node5","Node7"],
+	"Platform4": ["Node13","Node16"],
+	"Platform5": ["Node9","Node10","Node11","Node12"],
+	"Platform6": ["Node14","Node15"],
+	"Platform7": ["Node17","Node18","Node19","Node20","Node21"]
+};
+
+pathfinding.PlatformAreas = {};
 
 pathfinding.Nodes = {};
 
@@ -112,8 +120,8 @@ pathfinding.CalculateCost = function(start, dest) {
 	return Math.sqrt( xs + ys );
 };
 
-pathfinding.Astar = function(start_x, start_y, dest) {
-	/*closedset = [];
+pathfinding.Astar = function(ent, ent2) {
+	closedset = [];
 	openset = [];
 	camefrom = [];
 	
@@ -121,12 +129,25 @@ pathfinding.Astar = function(start_x, start_y, dest) {
 	gScore["start"] = 0;
 	
 	var start_neighbors = [];
+	var end_neighbors = [];
 	
+	for(var i = 0; i < pathfinding.PlatformAreas; i++) {
+		if(ent.body.getBounds().overlaps(pathfinding.PlatformAreas[i].body.getBounds()) {
+			start_neighbors = pathfinding.PlatformNodes[pathfinding.PlatformAreas[i]];
+		}
+		
+		if(ent2.body.getBounds().overlaps(pathfinding.PlatformAreas[i].body.getBounds()) {
+			end_neighbors = pathfinding.PlatformNodes[pathfinding.PlatformAreas[i]];
+		}
+	}
 	
-	var NodeStart = {pos: {x: start_x, y: start_y}, neighbors:
+	var NodeStart = {node: "start", position: {x: ent.body.pos.x, y: ent.body.pos.y}, neighbors: start_neighbors};
+	var NodeEnd = {node: "end", position: {x: ent2.body.pos.x, y: ent2.body.pos.y}, neighbors: end_neighbors};
+	
+	openset.push(NodeStart);
 	
 	fScore = {};
-	fScore["start"] := g_score["start"] + game.pathFinding.CalculateCost(start, dest);
+	fScore["start"] := g_score["start"] + game.pathFinding.CalculateCost(NodeStart.position, NodeEnd.position);
 	
 	while(openset.length > 0) {
 		var min = null;
@@ -134,17 +155,20 @@ pathfinding.Astar = function(start_x, start_y, dest) {
 		for(var i = 0; i < openset.length; i++) {
 			if(current == null) {
 				current = openset[i];
-				min = fScore[openset[i].orig];
+				min = fScore[openset[i].node];
 			}
 			else if (fScore[openset[i].orig] < min) {
 				current = openset[i];
-				min = fScore[openset[i].orig];
+				min = fScore[openset[i].node];
 			}
 		}
 		
 		if(current != null) {
-			if(current.orig == dest.orig) {
-				return GetPath(camefrom, dest);
+		
+			for(var i = 0; i < end_neighbors.length; i++) {
+				if(end_neighbors[i] == current.node) {
+					return GetPath(camefrom, NodeEnd);
+				}
 			}
 			
 			var index = openset.indexOf(current);
@@ -157,9 +181,11 @@ pathfinding.Astar = function(start_x, start_y, dest) {
 			for(var i = 0; i < current.neighbors.length; i++) {
 				if(closedset.indexOf(current.neighbors[i]) != -1)
 					continue;
-					
-				var tentative_g_score = gScore[current.orig] + game.pathFinding.CalculateCost(current, current
+				var neighbor = pathfinding.Nodes[current.neighbors[i].node];
+				var tentative_g_score = gScore[current.orig] + game.pathFinding.CalculateCost(current, current.neighbors[i]);
 			}
+			
+			//TODO finish this
 		}
-	}*/
+	}
 }

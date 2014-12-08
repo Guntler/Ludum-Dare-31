@@ -15,6 +15,7 @@ game.PathNodeEntity = me.Entity.extend({
 		//this.body.removeShapeAt(0);
 		//this.body.addShape(new me.Rect(x,y,10,10));
 		this.position = this.body.pos;
+		this.node = settings.type;
 		this.neighbors = pathfinding.NavMesh[settings.type];
 		this.body.setCollisionType = me.collision.types.NO_OBJECT;
 		
