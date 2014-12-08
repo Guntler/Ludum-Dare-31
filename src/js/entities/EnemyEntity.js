@@ -75,6 +75,8 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.spawner = spawner;
 		this.stunTime = 400;
         this.wait = 20;
+		this.cooldown = 150;
+		this.lastfired = null;
 		//this.body.setMaxVelocity(3, 15);
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
     },
@@ -183,8 +185,31 @@ game.EnemyEntity = game.BaseEntity.extend({
                         this.body.doubleJump = true;
                     }
                 }
+				
+				if(this.enemy.name = "Catbot") {
+					if(pathfinding.playerEntity.pos.y < this.pos.y + 50 && pathfinding.playerEntity.pos.y > this.pos.y - 50)
+						if(Math.random() > 0.8) {
+							if(this.lastfired == null || this.lastfired <= 0) {
+								me.audio.play('laser5');
+								if(this.direction=="right")
+									me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, this));
+								else
+									me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, this));
+								this.lastfired = this.cooldown;
+								this.attacking = true;
+								//me.audio.play("shoot");
+							}
+						}
+				}
             }
         }
+		
+		if(this.lastfired != null)
+			this.lastfired -= dt;
+			
+		if(this.lastfired<=0) {
+			this.shooting = false;
+		}
 		
 		this.timetodoublej -= dt;
         // check & update player movement
