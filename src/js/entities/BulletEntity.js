@@ -103,9 +103,14 @@ game.BulletEntity = me.Entity.extend({
                 return false;
             }
             else if(this.owner.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {
-                response.b.hurt(10);    //TODO switch for damage
-                me.game.world.removeChild(this);
-                return true;
+                if(!response.b.alive) {
+                    return false;
+                }
+                else {
+                    response.b.hurt(20);    //TODO switch for damage
+                    me.game.world.removeChild(this);
+                    return true;
+                }
             }
         }
         else if(response.b.body.setCollisionType === me.collision.types.PLAYER_OBJECT) {

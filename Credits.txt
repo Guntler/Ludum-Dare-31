@@ -1,0 +1,3 @@
+BGM: HorrorPen - http://opengameart.org/content/dramatic-action
+Weapon Fire: dklon - http://opengameart.org/content/laser-fire
+Explosion: Luke.RUSTLTD - http://opengameart.org/content/bombexplosion8bit

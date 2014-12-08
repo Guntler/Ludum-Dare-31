@@ -198,6 +198,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 
 		if(me.input.isKeyPressed('shoot')) {
 			if(this.lastfired == null || this.lastfired <= 0) {
+				me.audio.play('laser5');
 				if(this.direction=="right")
 					me.game.world.addChild(new me.pool.pull("bullet", this.pos.x, this.pos.y, this));
 				else
