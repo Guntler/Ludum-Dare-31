@@ -2,8 +2,7 @@ game.enemies = {
     skeledoge: {
         name: 'Skeledoge',
         image: "skeleton",
-        animation: [2, 3, 4, 5],
-        health:300,
+        health:800,
         damage: 30,
         stun: true,
         explosiveDmg: 100,
@@ -14,15 +13,15 @@ game.enemies = {
         spritewidth: 64,
         spriteheight: 64,
         animations: [["stand",[0,1,2,3]],["walk",[8, 9, 10, 11]],["attack",[16,17,18,19]],
-                        ["die",[24,25,26,27,28,29,30]],["air",[40,41,42,43,44]],["air",[45,46]]],
+                        ["die",[24,25,26,27,28,29,30]],["jump",[40,41,42,43,44]],["air",[45,46]]],
         currentAnim: "stand",
+        colRect: [14, 11,16, 64],
         attackRect: [[18, 27, 6, 13]] //down, left, right, up
     },
     catbot: {
         name: 'Catbot',
         image: "catbot",
-        animation: [2, 3, 4, 5],
-        health:300,
+        health:400,
         damage: 30,
         stun: true,
         explosiveDmg: 100,
@@ -60,10 +59,9 @@ game.EnemyEntity = game.BaseEntity.extend({
         this.alwaysUpdate = true;
 
         //this.attacking = true;
-        this.stunTime = 400;
         this.body.addShape(new me.Rect(this.enemy.colRect[0],this.enemy.colRect[1],
                                 this.enemy.colRect[2],this.enemy.colRect[3]));
-		
+		this.damage = this.enemy.damage;
 		this.path = null;
 		this.currentNode = 0;
 		this.nextNode = 1;
@@ -73,9 +71,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 		this.timetodoublej = 500;
 		this.arrived = true;
 		this.spawner = spawner;
-		this.firstexecution = true;
-		this.body.setMaxVelocity(3, 15);
-		this.health = 10;
+		this.stunTime = 400;
         this.wait = 20;
         this.body.setCollisionType = me.collision.types.ENEMY_OBJECT;
     },
@@ -113,8 +109,6 @@ game.EnemyEntity = game.BaseEntity.extend({
                 this.timeToPathfind = this.pathfindingInterval;
                 this.currentNode = 0;
                 this.nextNode = 1;
-				this.firstexecution = true;
-				//console.log(this.path);
 				if(this.path != null)
 					this.arrived = false;
             }
@@ -122,7 +116,7 @@ game.EnemyEntity = game.BaseEntity.extend({
 
             if (this.path != null && this.path.length > 0 && this.nextNode < this.path.length && !(this.arrived)) {
                 var neighbors = this.path[this.currentNode].neighbors;
-                var needsJump = false;
+                var needsJump = null;
                 for (var i = 0; i < neighbors.length; i++) {
                     if (neighbors[i].node == this.path[this.nextNode].node) {
                         needsJump = neighbors[i].requiresJump;
@@ -130,12 +124,11 @@ game.EnemyEntity = game.BaseEntity.extend({
                 }
 
                 if (this.path[this.nextNode].position.x > this.pos.x) {
-					if(this.path[this.nextNode].node == "end" && this.direction == "left" && !this.firstexecution) {
+					if(this.path[this.nextNode].node == "end" && this.direction == "left") {
 						this.arrived = true;
 					}
 					else {
 						this.direction = "right";
-						this.firstexecution = false;
 						// unflip the sprite
 						this.renderable.flipX(false);
 						// update the entity velocity
@@ -146,12 +139,11 @@ game.EnemyEntity = game.BaseEntity.extend({
 					}
                 }
                 else if (this.path[this.nextNode].position.x < this.pos.x) {
-					if(this.path[this.nextNode].node == "end" && this.direction == "right" && !this.firstexecution) {
+					if(this.path[this.nextNode].node == "end" && this.direction == "right") {
 						this.arrived = true;
 					}
 					else {
 						this.direction = "left";
-						this.firstexecution = false;
 						// flip the sprite on horizontal axis
 						this.renderable.flipX(true);
 						// update the entity velocity

@@ -1,5 +1,10 @@
+game.persistent = {
+	player: {
+		invincibilityFrames: 2000
+	}
+}
+
 game.PlayerEntity = game.BaseEntity.extend({
-	
     /* -----
     constructor
     ------ */
@@ -37,7 +42,8 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.cooldown = 150;
 		this.lastfired = null;
 		this.score = 0;
-		
+		this.invincibleTime = 0;
+		this.invincibilityFrames = false;
 		pathfinding.playerEntity = this;
     },
 
@@ -47,13 +53,13 @@ game.PlayerEntity = game.BaseEntity.extend({
 
 	onCollision : function (response, other) {
 		if (other.body.setCollisionType === me.collision.types.ENEMY_OBJECT) {
-			if (!this.invincible || !this.isHurt) {
+			if (!this.invincible && !this.isHurt && !this.invincibilityFrames) {
 				var kbMultiplier = 0;
 				var stunMultiplier = 1;
 				if (response.overlapV.x > 0) {		//Collided from the left
 					if(other.direction == "left" && other.attacking &&
 						other.renderable.getCurrentAnimationFrame()==1||other.renderable.getCurrentAnimationFrame()==2) {
-						kbMultiplier=-4;
+						kbMultiplier=-1;
 					}
 					else {
 						kbMultiplier=-1;
@@ -62,7 +68,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 				else if (response.overlapV.x < 0) {		//Collided from the right
 					if(other.direction == "right" && other.attacking &&
 						other.renderable.getCurrentAnimationFrame()==1||other.renderable.getCurrentAnimationFrame()==2) {
-						kbMultiplier=4;
+						kbMultiplier=1;
 					}
 					else {
 						kbMultiplier=1;
@@ -77,11 +83,14 @@ game.PlayerEntity = game.BaseEntity.extend({
 				this.body.vel.x = kbMultiplier*500;
 				this.body.vel.y = -5;
 				this.isHurt = true;
+				this.invincibilityFrames=true;
 				this.stunnedTime = stunMultiplier*other.stunTime;
-				this.renderable.flicker(this.stunnedTime);
-				this.hurt(10);
+				this.renderable.flicker(game.persistent.player.invincibilityFrames);
+				this.hurt(other.enemy.damage);
+				return true;
+			} else {
+				return false;
 			}
-			return true;
 		}
 		else if (other.body.setCollisionType === me.collision.types.COLLECTABLE_OBJECT) {
 			other.open(this);
@@ -204,8 +213,8 @@ game.PlayerEntity = game.BaseEntity.extend({
     ------ */
     update: function(dt) {
 		if(this.stunnedTime<=0) {
-			this.isHurt = false;
 			this.stunnedTime = 0;
+			this.isHurt = false;
 		}
 		else {
 			this.switchAnimation("hurt");
@@ -214,6 +223,14 @@ game.PlayerEntity = game.BaseEntity.extend({
 
 		if(!this.isHurt) {
 			this.handleInput();
+		}
+
+		if(this.invincibleTime >= game.persistent.player.invincibilityFrames && this.invincibilityFrames) {
+			this.invincibilityFrames=false;
+			this.invincibleTime = 0;
+		} else {
+			if(this.invincibilityFrames)
+				this.invincibleTime += dt;
 		}
 		
 		if(this.lastfired != null)
