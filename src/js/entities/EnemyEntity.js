@@ -6,8 +6,8 @@ game.enemies = {
         damage: 30,
         stun: true,
         explosiveDmg: 100,
-        speedX: 30,
-        speedY: 0,
+        speedX: 2,
+        speedY: 15,
         width: 16,
         height: 64,
         spritewidth: 64,
@@ -21,12 +21,12 @@ game.enemies = {
     catbot: {
         name: 'Catbot',
         image: "catbot",
-        health:400,
+        health:300,
         damage: 30,
         stun: true,
         explosiveDmg: 100,
-        speedX: 30,
-        speedY: 0,
+        speedX: 4,
+        speedY: 15,
         width: 16,
         height: 32,
         spritewidth: 50,
@@ -48,7 +48,8 @@ game.EnemyEntity = game.BaseEntity.extend({
                 spritewidth: this.enemy.spritewidth, spriteheight: this.enemy.spriteheight}]);
 
         var i=0;
-
+        this.body.setVelocity(this.enemy.speedX, this.enemy.speedY);
+        this.body.setMaxVelocity(this.enemy.speedX, this.enemy.speedY);
         //console.log();
         for(i=0;i<this.enemy.animations.length;i++) {
             this.renderable.addAnimation(this.enemy.animations[i][0],  this.enemy.animations[i][1]);
