@@ -3,7 +3,8 @@ game.GameOverScreen = me.ScreenObject.extend({
 	 *  action to perform on state change
 	 */
 	onResetEvent: function() {
-		me.audio.stopTrack();
+		me.audio.stop("dramatic");
+		
 		// load a level
 		var gImage =  me.loader.getImage('gameover');
 		me.game.world.addChild(new me.Sprite(
@@ -19,6 +20,7 @@ game.GameOverScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.C, "enter", false);
 		this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
 			if (action === "enter") {
+				me.audio.play("dramatic", true);
 				me.state.change(me.state.PLAY);
 			}
 		});
