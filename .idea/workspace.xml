@@ -2,32 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ab1981a-1d1e-4785-98ad-330c5da4ad5e" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\area01_bkg0.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\area01_bkg1.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\bullets.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\cave.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\gui\title_screen.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\loadbg.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\map\area01_level_tiles.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\map\cave-1.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\map\lab1.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\map\minimal_industry.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\map\sci-fi.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\map\station.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\spacebg.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\sprite\bubsy_jump.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\sprite\bunny.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\sprite\gripe_run_right.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\sprite\spinning_coin_gold.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\pbpdi_000\Documents\Ludum-Dare-31\src\data\img\sprite\wheelie_right.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/entities/HUD.js" afterPath="$PROJECT_DIR$/src/js/entities/HUD.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/entities/PlayerEntity.js" afterPath="$PROJECT_DIR$/src/js/entities/PlayerEntity.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/entities/SpawnerEntity.js" afterPath="$PROJECT_DIR$/src/js/entities/SpawnerEntity.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/game.js" afterPath="$PROJECT_DIR$/src/js/game.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/screens/death.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.html" afterPath="$PROJECT_DIR$/src/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/screens/play.js" afterPath="$PROJECT_DIR$/src/js/screens/play.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/resources.js" afterPath="$PROJECT_DIR$/src/js/resources.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/screens/title.js" afterPath="$PROJECT_DIR$/src/js/screens/title.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Ludum-Dare-31.iws" />
@@ -68,17 +44,17 @@
         <entry file="file://$PROJECT_DIR$/src/js/entities/SpawnerEntity.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="1309">
-              <caret line="49" column="45" selection-start-line="49" selection-start-column="45" selection-end-line="49" selection-end-column="45" />
+              <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/game.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="437" max-vertical-offset="1088">
-              <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.5168" vertical-offset="374" max-vertical-offset="1326">
+              <caret line="41" column="73" selection-start-line="41" selection-start-column="73" selection-end-line="41" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -144,16 +120,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.1152" vertical-offset="0" max-vertical-offset="1309">
-              <caret line="41" column="63" selection-start-line="41" selection-start-column="63" selection-end-line="41" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -171,15 +137,15 @@
         <option value="$PROJECT_DIR$/src/js/entities/BulletEntity.js" />
         <option value="$PROJECT_DIR$/src/js/entities/BaseEntity.js" />
         <option value="$PROJECT_DIR$/src/js/entities/EnemyEntity.js" />
-        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/js/entities/PlayerEntity.js" />
         <option value="$PROJECT_DIR$/src/js/entities/SpawnerEntity.js" />
         <option value="$PROJECT_DIR$/src/js/screens/gameover.js" />
-        <option value="$PROJECT_DIR$/src/js/game.js" />
         <option value="$PROJECT_DIR$/src/js/screens/title.js" />
         <option value="$PROJECT_DIR$/src/js/entities/HUD.js" />
         <option value="$PROJECT_DIR$/src/js/resources.js" />
         <option value="$PROJECT_DIR$/src/js/screens/play.js" />
+        <option value="$PROJECT_DIR$/src/js/game.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
       </list>
     </option>
   </component>
@@ -465,6 +431,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2489019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -476,7 +443,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -874,34 +840,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/entities/SpawnerEntity.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="1309">
-          <caret line="49" column="45" selection-start-line="49" selection-start-column="45" selection-end-line="49" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="437" max-vertical-offset="1088">
-          <caret line="55" column="37" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/screens/gameover.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
           <caret line="23" column="11" selection-start-line="5" selection-start-column="8" selection-end-line="23" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/entities/HUD.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1011" max-vertical-offset="2890">
-          <caret line="109" column="93" selection-start-line="109" selection-start-column="93" selection-end-line="109" selection-end-column="93" />
           <folding />
         </state>
       </provider>
@@ -938,10 +880,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/entities/HUD.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1011" max-vertical-offset="2890">
+          <caret line="109" column="93" selection-start-line="109" selection-start-column="93" selection-end-line="109" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42549923" vertical-offset="437" max-vertical-offset="1088">
+          <caret line="42" column="59" selection-start-line="42" selection-start-column="59" selection-end-line="42" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/entities/SpawnerEntity.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="1309">
+          <caret line="55" column="26" selection-start-line="55" selection-start-column="26" selection-end-line="55" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1152" vertical-offset="0" max-vertical-offset="1309">
-          <caret line="41" column="63" selection-start-line="41" selection-start-column="63" selection-end-line="41" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.5168" vertical-offset="374" max-vertical-offset="1326">
+          <caret line="41" column="73" selection-start-line="41" selection-start-column="73" selection-end-line="41" selection-end-column="73" />
           <folding />
         </state>
       </provider>
