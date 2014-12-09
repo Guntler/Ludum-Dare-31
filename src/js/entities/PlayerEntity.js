@@ -1,6 +1,8 @@
 game.persistent = {
 	player: {
-		invincibilityFrames: 2000
+		invincibilityFrames: 2000,
+		score: 0,
+		spawnersExhausted: 0
 	}
 }
 
@@ -24,6 +26,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.renderable.addAnimation("standshoot",  [80,81,82,83,84,85,86,87],100);
 		this.renderable.addAnimation("walkhold",  [90,91,92,93,94,95,96,97]);
 		this.renderable.addAnimation("walkshoot",  [100,101,102,103,104,105,106,107],100);
+		this.renderable.addAnimation("die",  [140,141,142,143,144,145,146]);
 		this.renderable.addAnimation("jumphold",  [110,111,112,113]);
 		this.renderable.addAnimation("airhold",  [114,115]);
 		this.renderable.addAnimation("hurt",  [0,1,2,1]);
@@ -46,7 +49,7 @@ game.PlayerEntity = game.BaseEntity.extend({
 		this.score = 0;
 		this.invincibleTime = 0;
 		this.invincibilityFrames = false;
-
+		this.wait = 20;
 
 		pathfinding.playerEntity = this;
     },
@@ -219,6 +222,26 @@ game.PlayerEntity = game.BaseEntity.extend({
     update the player pos
     ------ */
     update: function(dt) {
+		if(this.health<=0) {
+			if(!this.playedDead) {
+				me.audio.play('explosion');
+				this.playedDead = true;
+			}
+			this.switchAnimation("die");
+			this.alive = false;
+			this.wait--;
+			this.renderable.flicker(0);
+
+			if(this.wait<=0) {
+				me.state.change(me.state.GAMEOVER);
+				game.persistent.player.score = this.score;
+			}
+		}
+
+		if(!this.alive) {
+			return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x!=0 || this.body.vel.y!=0);
+		}
+
 		if(this.stunnedTime<=0) {
 			this.isHurt = false;
 			this.stunnedTime = 0;

@@ -63,6 +63,10 @@ game.SpawnerEntity = me.Entity.extend({
 
         if(this.spawned == this.max) {
             this.exhausted = true;
+            game.persistent.player.spawnersExhausted++;
+            if(game.persistent.player.spawnersExhausted>=4) {
+                me.state.change(me.state.GAMEOVER);
+            }
         }
     }
 });

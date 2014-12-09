@@ -41,6 +41,7 @@ var game = {
 	"loaded" : function () {
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
+		me.state.set(me.state.GAMEOVER, new game.GameOverScreen());
 		
 		// register our player entity in the object pool
 		me.pool.register("mainPlayer", game.PlayerEntity);
@@ -50,15 +51,8 @@ var game = {
 		me.pool.register("spawner", game.SpawnerEntity, true);
 		me.pool.register("PathNode", game.PathNodeEntity, true);
 		me.pool.register("PlatformArea", game.PlatformAreaEntity, true);
-
-     
-		// enable the keyboard
-		me.input.bindKey(me.input.KEY.LEFT,  "left");
-		me.input.bindKey(me.input.KEY.RIGHT, "right");
-		me.input.bindKey(me.input.KEY.X,     "jump", true);
-		me.input.bindKey(me.input.KEY.C, "shoot", true);
 		
 		// Start the game.
-		me.state.change(me.state.PLAY);
+		me.state.change(me.state.MENU);
 	}
 };

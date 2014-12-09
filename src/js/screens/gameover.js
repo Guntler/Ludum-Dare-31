@@ -1,5 +1,5 @@
-game.TitleScreen = me.ScreenObject.extend({
-	/**	
+game.GameOverScreen = me.ScreenObject.extend({
+	/**
 	 *  action to perform on state change
 	 */
 	onResetEvent: function() {
@@ -17,19 +17,18 @@ game.TitleScreen = me.ScreenObject.extend({
 		me.game.world.addChild(this.HUD);
 
 		me.input.bindKey(me.input.KEY.C, "enter", false);
-		me.input.bindKey(me.input.KEY.X, "enter", false);
 		this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
 			if (action === "enter") {
 				me.state.change(me.state.PLAY);
 			}
 		});
 	},
-	
-	
-	/**	
+
+	/**
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function() {
-		; // TODO
+		// remove the HUD from the game world
+		me.game.world.removeChild(this.HUD);
 	}
 });
